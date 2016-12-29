@@ -94,7 +94,7 @@ int triangulate_polygon(int ncontours, int cntr[], double(*vertices)[2], int (*t
 #include "input.h"
 #include "cos_table.h"
 #include "hqr.h"
-#include "time.h"
+#include "timer.h"
 #include "font.h"
 #include "aitd_box.h"
 #include "save.h"

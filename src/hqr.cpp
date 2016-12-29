@@ -27,7 +27,7 @@
 #include "hqr.h"
 #include "pak.h"
 #include "debugger.h"
-#include "time.h"
+#include "timer.h"
 #include "fitd.h"
 #include "file_access.h"
 

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="FITD" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/FITD" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/FITD" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add directory="../../src" />
+		</Compiler>
+		<Unit filename="../../src/actor.cpp" />
+		<Unit filename="../../src/actor.h" />
+		<Unit filename="../../src/actor_list.cpp" />
+		<Unit filename="../../src/actor_list.h" />
+		<Unit filename="../../src/aitd_box.cpp" />
+		<Unit filename="../../src/aitd_box.h" />
+		<Unit filename="../../src/anim.cpp" />
+		<Unit filename="../../src/anim.h" />
+		<Unit filename="../../src/anim_action.cpp" />
+		<Unit filename="../../src/anim_action.h" />
+		<Unit filename="../../src/common.h" />
+		<Unit filename="../../src/common/endian.h" />
+		<Unit filename="../../src/common/forbidden.h" />
+		<Unit filename="../../src/common/scummsys.h" />
+		<Unit filename="../../src/common/stream.h" />
+		<Unit filename="../../src/common/textconsole.cpp" />
+		<Unit filename="../../src/common/textconsole.h" />
+		<Unit filename="../../src/cos_table.cpp" />
+		<Unit filename="../../src/cos_table.h" />
+		<Unit filename="../../src/cvars.h" />
+		<Unit filename="../../src/debug_font.cpp" />
+		<Unit filename="../../src/debug_font.h" />
+		<Unit filename="../../src/debugger.cpp" />
+		<Unit filename="../../src/debugger.h" />
+		<Unit filename="../../src/eval_var.cpp" />
+		<Unit filename="../../src/eval_var.h" />
+		<Unit filename="../../src/file_access.cpp" />
+		<Unit filename="../../src/file_access.h" />
+		<Unit filename="../../src/filestream.cpp" />
+		<Unit filename="../../src/filestream.h" />
+		<Unit filename="../../src/fitd.cpp" />
+		<Unit filename="../../src/fitd.h" />
+		<Unit filename="../../src/floor.cpp" />
+		<Unit filename="../../src/floor.h" />
+		<Unit filename="../../src/fmopl.cpp" />
+		<Unit filename="../../src/fmopl.h" />
+		<Unit filename="../../src/font.cpp" />
+		<Unit filename="../../src/font.h" />
+		<Unit filename="../../src/gfx.cpp" />
+		<Unit filename="../../src/gfx.h" />
+		<Unit filename="../../src/hqr.cpp" />
+		<Unit filename="../../src/hqr.h" />
+		<Unit filename="../../src/input.cpp" />
+		<Unit filename="../../src/input.h" />
+		<Unit filename="../../src/inventory.cpp" />
+		<Unit filename="../../src/inventory.h" />
+		<Unit filename="../../src/life.cpp" />
+		<Unit filename="../../src/life.h" />
+		<Unit filename="../../src/life_2.cpp" />
+		<Unit filename="../../src/life_2.h" />
+		<Unit filename="../../src/life_macro_table.cpp" />
+		<Unit filename="../../src/lines.cpp" />
+		<Unit filename="../../src/main.cpp" />
+		<Unit filename="../../src/main.h" />
+		<Unit filename="../../src/main_loop.cpp" />
+		<Unit filename="../../src/main_loop.h" />
+		<Unit filename="../../src/music.cpp" />
+		<Unit filename="../../src/music.h" />
+		<Unit filename="../../src/object.cpp" />
+		<Unit filename="../../src/object.h" />
+		<Unit filename="../../src/osystem.h" />
+		<Unit filename="../../src/osystemSDL.cpp" />
+		<Unit filename="../../src/osystemSDL_GL.cpp" />
+		<Unit filename="../../src/pak.cpp" />
+		<Unit filename="../../src/pak.h" />
+		<Unit filename="../../src/palette.cpp" />
+		<Unit filename="../../src/palette.h" />
+		<Unit filename="../../src/polys.cpp" />
+		<Unit filename="../../src/renderer.cpp" />
+		<Unit filename="../../src/renderer.h" />
+		<Unit filename="../../src/resource.cpp" />
+		<Unit filename="../../src/resource.h" />
+		<Unit filename="../../src/room.cpp" />
+		<Unit filename="../../src/room.h" />
+		<Unit filename="../../src/save.cpp" />
+		<Unit filename="../../src/save.h" />
+		<Unit filename="../../src/screen.cpp" />
+		<Unit filename="../../src/screen.h" />
+		<Unit filename="../../src/sequence.cpp" />
+		<Unit filename="../../src/startup_menu.cpp" />
+		<Unit filename="../../src/startup_menu.h" />
+		<Unit filename="../../src/system_menu.cpp" />
+		<Unit filename="../../src/system_menu.h" />
+		<Unit filename="../../src/tatou.cpp" />
+		<Unit filename="../../src/tatou.h" />
+		<Unit filename="../../src/textes.cpp" />
+		<Unit filename="../../src/textes.h" />
+		<Unit filename="../../src/thread_code.cpp" />
+		<Unit filename="../../src/thread_code.h" />
+		<Unit filename="../../src/timer.cpp" />
+		<Unit filename="../../src/timer.h" />
+		<Unit filename="../../src/track.cpp" />
+		<Unit filename="../../src/track.h" />
+		<Unit filename="../../src/unpack.cpp" />
+		<Unit filename="../../src/unpack.h" />
+		<Unit filename="../../src/vars.cpp" />
+		<Unit filename="../../src/vars.h" />
+		<Unit filename="../../src/version.cpp" />
+		<Unit filename="../../src/version.h" />
+		<Unit filename="../../src/video_mode.cpp" />
+		<Unit filename="../../src/video_mode.h" />
+		<Unit filename="../../src/zv.cpp" />
+		<Unit filename="../../src/zv.h" />
+		<Extensions>
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

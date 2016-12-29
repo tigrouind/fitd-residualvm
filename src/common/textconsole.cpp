@@ -1,6 +1,7 @@
 // Copied from ResidualVM, covered by GPLv2+
 #include <cstdio>
 #include <cstdlib>
+#include <cstdarg>
 #include "textconsole.h"
 
 void warning(const char *s, ...) {

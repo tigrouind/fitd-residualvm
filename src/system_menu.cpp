@@ -28,7 +28,7 @@ namespace Fitd {
 void printString(int index, int textIndex, int selectedIndex) {
 	int topPosition;
 
-	topPosition = (((currentMenuBottom - currentMenuTop) / 2) + currentMenuTop) + (index << 4) - 56;
+	topPosition = (((currentMenuBottom - currentMenuTop) / 2) + currentMenuTop) + (index << 4) - 8;
 
 	if(index == selectedIndex) {
 		drawSlectedText(0xA0, topPosition, textIndex, 0xF, 4);

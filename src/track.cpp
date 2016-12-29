@@ -215,7 +215,7 @@ void manualRot(int32 param) {
 		if(currentProcessedActorPtr->rotate.param == 0) {
 			int32 oldBeta = currentProcessedActorPtr->beta;
 
-			if(currentProcessedActorPtr->speed != 0) {
+			if(currentProcessedActorPtr->speed == 0) {
 				startActorRotation(oldBeta, oldBeta + 0x100, param / 2, &currentProcessedActorPtr->rotate);
 			} else {
 				startActorRotation(oldBeta, oldBeta + 0x100, param, &currentProcessedActorPtr->rotate);
@@ -234,7 +234,7 @@ void manualRot(int32 param) {
 		if(currentProcessedActorPtr->rotate.param == 0) {
 			int32 oldBeta = currentProcessedActorPtr->beta;
 
-			if(currentProcessedActorPtr->speed != 0) {
+			if(currentProcessedActorPtr->speed == 0) {
 				startActorRotation(oldBeta, oldBeta - 0x100, param / 2, &currentProcessedActorPtr->rotate);
 			} else {
 				startActorRotation(oldBeta, oldBeta - 0x100, param, &currentProcessedActorPtr->rotate);

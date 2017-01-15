@@ -308,7 +308,7 @@ void GFXSystem::init()  // that's the constructor of the system dependent
 
 	// SDL_mixer init
 
-	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 1, 2048) == -1) {
+	if(Mix_OpenAudio(8000, MIX_DEFAULT_FORMAT, 1, 512) == -1) {
 		error("Mix_OpenAudio: %s\n", Mix_GetError());
 	}
 

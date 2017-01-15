@@ -252,10 +252,10 @@ void GFXSystem::init()  // that's the constructor of the system dependent
 
 	keyboard[SDLK_RETURN] = 0;
 
-	sdl_screen = SDL_SetVideoMode(800, 600, 32, SDL_OPENGL/*|SDL_FULLSCREEN*/);
+	sdl_screen = SDL_SetVideoMode(640, 400, 32, SDL_OPENGL/*|SDL_FULLSCREEN*/);
 
 	if(sdl_screen == NULL) {
-		error("Couldn't set 640x480x32 video mode: %s\n", SDL_GetError());
+		error("Couldn't set 640x400x32 video mode: %s\n", SDL_GetError());
 	}
 
 	_mouseLeft = 0;
@@ -270,12 +270,12 @@ void GFXSystem::init()  // that's the constructor of the system dependent
 	// glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 
-	glViewport(0, 0, 800, 600);
+	glViewport(0, 0, 640, 400);
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);       // Black Background
 	glMatrixMode(GL_PROJECTION);            // Select The Projection Matrix
 	glLoadIdentity();                 // Reset The Projection Matrix
-	glOrtho(0, 320, 200, 0, 0.2, -100 * 1000);
+	glOrtho(0, 320, 200, 0, 0, -100 * 1000);
 	glMatrixMode(GL_MODELVIEW);             // Select The Modelview Matrix
 	glLoadIdentity();                 // Reset The Modelview Matrix
 
@@ -578,15 +578,15 @@ void GFXSystem::startFrame() {
 		glVertex3f(0, 0, 49);
 		glTexCoord2f(640.f / 1024.f, 0);
 		glVertex3f(640, 0, 49);
-		glTexCoord2f(0.0f, 480.f / 512.f);
-		glVertex3f(0, 480, 49);
+		glTexCoord2f(0.0f, 400.f / 512.f);
+		glVertex3f(0, 400, 49);
 
 		glTexCoord2f(640.f / 1024.f, 0); // triangle haut gauche
 		glVertex3f(640, 0, 49);
-		glTexCoord2f(640.f / 1024.f, 480.f / 512.f);
-		glVertex3f(640, 480, 49);
-		glTexCoord2f(0.0f, 480.f / 512.f);
-		glVertex3f(0, 480, 49);
+		glTexCoord2f(640.f / 1024.f, 400.f / 512.f);
+		glVertex3f(640, 400, 49);
+		glTexCoord2f(0.0f, 400.f / 512.f);
+		glVertex3f(0, 400, 49);
 
 		glEnd();
 		glBindTexture(GL_TEXTURE_2D, 0);
@@ -1000,15 +1000,15 @@ void GFXSystem::cleanScreenKeepZBuffer() {
 	glVertex3f(0, 0, 49);
 	glTexCoord2f(640.f / 1024.f, 0);
 	glVertex3f(640, 0, 49);
-	glTexCoord2f(0.0f, 480.f / 512.f);
-	glVertex3f(0, 480, 49);
+	glTexCoord2f(0.0f, 400.f / 512.f);
+	glVertex3f(0, 400, 49);
 
 	glTexCoord2f(640.f / 1024.f, 0); // triangle haut gauche
 	glVertex3f(640, 0, 49);
-	glTexCoord2f(640.f / 1024.f, 480.f / 512.f);
-	glVertex3f(640, 480, 49);
-	glTexCoord2f(0.0f, 480.f / 512.f);
-	glVertex3f(0, 480, 49);
+	glTexCoord2f(640.f / 1024.f, 400.f / 512.f);
+	glVertex3f(640, 400, 49);
+	glTexCoord2f(0.0f, 400.f / 512.f);
+	glVertex3f(0, 400, 49);
 
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);

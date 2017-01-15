@@ -8,12 +8,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- 
+
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- 
+
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
@@ -268,11 +268,11 @@ void osystem_crossFade(char *buffer, char *palette) {
 	amask = 0xff000000;
 #endif
 
-	backupSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, 640, 480, 32, rmask, gmask, bmask, 0);
+	backupSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, 640, 400, 32, rmask, gmask, bmask, 0);
 	newSurface =
-	    SDL_CreateRGBSurface(SDL_SWSURFACE | SDL_SRCALPHA, 640, 480, 32, rmask, gmask, bmask, 0);
+	    SDL_CreateRGBSurface(SDL_SWSURFACE | SDL_SRCALPHA, 640, 400, 32, rmask, gmask, bmask, 0);
 
-	tempSurface = SDL_CreateRGBSurfaceFrom(buffer, 640, 480, 8, 640, 0, 0, 0, 0);
+	tempSurface = SDL_CreateRGBSurfaceFrom(buffer, 640, 400, 8, 640, 0, 0, 0, 0);
 	SDL_SetColors(tempSurface, (SDL_Color *) palette, 0, 256);
 
 	SDL_BlitSurface(sdl_screen, NULL, backupSurface, NULL);

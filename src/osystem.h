@@ -47,6 +47,7 @@
 #define USE_GL
 #endif
 
+#include "common.h"
 #include "palette.h"
 
 namespace Fitd {
@@ -58,7 +59,7 @@ public:
 
 	int _mouseRight;
 	int _mouseLeft;
-	
+
 	char *_palette;
 	Palette *_paletteObj;
 

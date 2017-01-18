@@ -375,11 +375,11 @@ int loadSave(int saveNumber) {
 		ASSERT(sizeof(actorTable[i].gamma) == 2);
 		fread(&actorTable[i].gamma, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].room) == 2);
-		fread(&actorTable[i].room, 2, 1, fHandle);
-
 		ASSERT(sizeof(actorTable[i].stage) == 2);
 		fread(&actorTable[i].stage, 2, 1, fHandle);
+
+		ASSERT(sizeof(actorTable[i].room) == 2);
+		fread(&actorTable[i].room, 2, 1, fHandle);
 
 		ASSERT(sizeof(actorTable[i].lifeMode) == 2);
 		fread(&actorTable[i].lifeMode, 2, 1, fHandle);
@@ -841,11 +841,11 @@ int makeSaveFile(int entry) {
 		ASSERT(sizeof(actorTable[i].gamma) == 2);
 		fwrite(&actorTable[i].gamma, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].room) == 2);
-		fwrite(&actorTable[i].room, 2, 1, fHandle);
-
 		ASSERT(sizeof(actorTable[i].stage) == 2);
 		fwrite(&actorTable[i].stage, 2, 1, fHandle);
+
+		ASSERT(sizeof(actorTable[i].room) == 2);
+		fwrite(&actorTable[i].room, 2, 1, fHandle);
 
 		ASSERT(sizeof(actorTable[i].lifeMode) == 2);
 		fwrite(&actorTable[i].lifeMode, 2, 1, fHandle);

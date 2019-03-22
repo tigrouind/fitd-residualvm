@@ -2,3 +2,4 @@ obj/
 bin/
 FITD.layout
 FITD.depend
+.vscode/ipch/

@@ -133,7 +133,7 @@ void mainLoop(int allowSystemMenu) {
 			currentProcessedActorPtr = actorTable;
 
 			for(currentProcessedActorIdx = 0; currentProcessedActorIdx < NUM_MAX_ACTOR; currentProcessedActorIdx++) {
-				if(currentProcessedActorPtr->field_0 >= 0) {
+				if(currentProcessedActorPtr->ID >= 0) {
 					currentProcessedActorPtr->COL_BY = -1;
 					currentProcessedActorPtr->HIT_BY = -1;
 					currentProcessedActorPtr->HIT = -1;
@@ -146,7 +146,7 @@ void mainLoop(int allowSystemMenu) {
 
 			currentProcessedActorPtr = actorTable;
 			for(currentProcessedActorIdx = 0; currentProcessedActorIdx < NUM_MAX_ACTOR; currentProcessedActorIdx++) {
-				if(currentProcessedActorPtr->field_0 >= 0) {
+				if(currentProcessedActorPtr->ID >= 0) {
 					int flag = currentProcessedActorPtr->flags;
 
 					if(flag & 1 || (g_fitd->getGameType() >= GType_AITD2 && flag & 0x200)) {
@@ -167,7 +167,7 @@ void mainLoop(int allowSystemMenu) {
 
 			currentProcessedActorPtr = actorTable;
 			for(currentProcessedActorIdx = 0; currentProcessedActorIdx < NUM_MAX_ACTOR; currentProcessedActorIdx++) {
-				if(currentProcessedActorPtr->field_0 >= 0) {
+				if(currentProcessedActorPtr->ID >= 0) {
 					if(currentProcessedActorPtr->life != -1) {
 						switch(g_fitd->getGameType()) {
 						case GType_AITD2:
@@ -225,7 +225,7 @@ void mainLoop(int allowSystemMenu) {
 				currentCamera = startGameVar1;
 
 				for(currentProcessedActorIdx = 0; currentProcessedActorIdx < NUM_MAX_ACTOR; currentProcessedActorIdx++) {
-					if(currentProcessedActorPtr->field_0 >= 0) {
+					if(currentProcessedActorPtr->ID >= 0) {
 						if(currentProcessedActorPtr->life != -1) {
 							if(currentProcessedActorPtr->flags & 0x200) {
 								if(currentProcessedActorPtr->lifeMode & 3)

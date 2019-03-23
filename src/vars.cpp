@@ -253,7 +253,7 @@ void objectStruct::readFromStream(Common::SeekableReadStream *stream) {
 	this->ownerIdx = stream->readUint16LE();
 	this->body = stream->readUint16LE();
 	this->flags = stream->readUint16LE();
-	this->field_6 = stream->readUint16LE();
+	this->zvType = stream->readUint16LE();
 	this->foundBody = stream->readUint16LE();
 	this->foundName = stream->readUint16LE();
 	this->flags2 = stream->readUint16LE();

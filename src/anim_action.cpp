@@ -68,7 +68,7 @@ int checkLineProjectionWithActors(int actorIdx, int X, int Y, int Z, int beta, i
 			int i;
 
 			for(i = 0; i < NUM_MAX_ACTOR; i++) {
-				if(currentActorPtr->field_0 != -1 && i != actorIdx && !(currentActorPtr->flags & 0x20)) {
+				if(currentActorPtr->ID != -1 && i != actorIdx && !(currentActorPtr->flags & 0x20)) {
 					ZVStruct *zvPtr = &currentActorPtr->zv;
 
 					if(room != currentActorPtr->room) {
@@ -244,7 +244,7 @@ void processAnimAction(void) {
 
 			if(checkForHardCol(&rangeZv, &roomDataTable[currentProcessedActorPtr->room])) {
 				currentProcessedActorPtr->animActionType = 0;
-				putAt(objIdx, currentProcessedActorPtr->field_0);
+				putAt(objIdx, currentProcessedActorPtr->ID);
 			} else {
 				if(currentProcessedActorPtr->FRAME == currentProcessedActorPtr->animActionFRAME) {
 					int32 x;
@@ -321,13 +321,13 @@ void processAnimAction(void) {
 		objectTable[objIdx].y = y;
 		objectTable[objIdx].z = z;
 
-		objectTable[objIdx].alpha = currentProcessedActorPtr->field_0; // hu ?
+		objectTable[objIdx].alpha = currentProcessedActorPtr->ID; // hu ?
 
 		actorPtr->dynFlags = 0;
 		actorPtr->animActionType = 9;
 		actorPtr->animActionParam = 100;
 		actorPtr->hitForce = currentProcessedActorPtr->hitForce;
-		actorPtr->field_98 = -1;
+		actorPtr->animActionHotpoint = -1;
 		actorPtr->speed = 3000;
 
 		startActorRotation(0, actorPtr->speed, 60, &actorPtr->speedChange);
@@ -338,7 +338,7 @@ void processAnimAction(void) {
 		break;
 	}
 	case 9: { // during throw
-		objectStruct *objPtr = &objectTable[currentProcessedActorPtr->field_0];
+		objectStruct *objPtr = &objectTable[currentProcessedActorPtr->ID];
 
 		ZVStruct rangeZv;
 		ZVStruct rangeZv2;
@@ -417,7 +417,7 @@ void processAnimAction(void) {
 				for(i = 0; i < collision; i++) {
 					int32 currentActorCol = currentProcessedActorPtr->COL[i];
 
-					if(actorTable[currentActorCol].field_0 == objPtr->alpha) {
+					if(actorTable[currentActorCol].ID == objPtr->alpha) {
 						collision2--;
 						objPtr->x = xtemp;
 						objPtr->y = ytemp;
@@ -426,7 +426,7 @@ void processAnimAction(void) {
 						return;
 					}
 
-					if(actorTable[currentActorCol].field_0 == CVars[getCVarsIdx(REVERSE_OBJECT)]) {
+					if(actorTable[currentActorCol].ID == CVars[getCVarsIdx(REVERSE_OBJECT)]) {
 						objPtr->alpha = CVars[getCVarsIdx(REVERSE_OBJECT)];
 						currentProcessedActorPtr->beta += 0x200;
 						xtemp = x3;

@@ -163,7 +163,7 @@ void loadRoom(int roomNumber) {
 		int var_A = (roomDataTable[roomNumber].worldZ - cameraVar2) * 10;
 
 		for(i = 0; i < NUM_MAX_ACTOR; i++) {
-			if(actorTable[i].field_0 != -1) {
+			if(actorTable[i].ID != -1) {
 				/*       if(g_fitd->getGameType() == GType_AITD1) // special case. In GType_AITD1, the load room function was always triggered just after the actor was moved in the new room.
 				 // it is not always the case in later games. Maybe we could generalize the GType_AITD2 way...
 				 {

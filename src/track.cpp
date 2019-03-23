@@ -94,7 +94,7 @@ int32 GetAngle(int32 X1, int32 Y1, int32 X2, int32 Y2) {
 		finalAngle = -finalAngle;
 	}
 
-	if(flag & 1) {  // X and Y are exchanged -> 90° rotation needed
+	if(flag & 1) {  // X and Y are exchanged -> 90ï¿½ rotation needed
 		finalAngle = -finalAngle + 0x100;
 	}
 
@@ -206,11 +206,11 @@ int32 computeAngleModificatorToPosition(int32 x1, int32 z1, int32 beta, int32 x2
 
 void manualRot(int32 param) {
 	if(input4 & 4) {
-		if(currentProcessedActorPtr->field_72 != 1) {
+		if(currentProcessedActorPtr->rotateTarget != 1) {
 			currentProcessedActorPtr->rotate.param = 0;
 		}
 
-		currentProcessedActorPtr->field_72 = 1;
+		currentProcessedActorPtr->rotateTarget = 1;
 
 		if(currentProcessedActorPtr->rotate.param == 0) {
 			int32 oldBeta = currentProcessedActorPtr->beta;
@@ -225,11 +225,11 @@ void manualRot(int32 param) {
 		currentProcessedActorPtr->beta = updateActorRotation(&currentProcessedActorPtr->rotate);
 	}
 	if(input4 & 8) {
-		if(currentProcessedActorPtr->field_72 != -1) {
+		if(currentProcessedActorPtr->rotateTarget != -1) {
 			currentProcessedActorPtr->rotate.param = 0;
 		}
 
-		currentProcessedActorPtr->field_72 = -1;
+		currentProcessedActorPtr->rotateTarget = -1;
 
 		if(currentProcessedActorPtr->rotate.param == 0) {
 			int32 oldBeta = currentProcessedActorPtr->beta;
@@ -244,7 +244,7 @@ void manualRot(int32 param) {
 		currentProcessedActorPtr->beta = updateActorRotation(&currentProcessedActorPtr->rotate);
 	}
 	if(!(input4 & 0xC)) {
-		currentProcessedActorPtr->field_72 = 0;
+		currentProcessedActorPtr->rotateTarget = 0;
 		currentProcessedActorPtr->rotate.param = 0;
 	}
 }
@@ -317,7 +317,7 @@ void processTrack(void) {
 		int32 followedActorIdx = objectTable[currentProcessedActorPtr->trackNumber].ownerIdx;
 
 		if(followedActorIdx == -1) {
-			currentProcessedActorPtr->field_72 = 0;
+			currentProcessedActorPtr->rotateTarget = 0;
 			currentProcessedActorPtr->speed = 0;
 		} else {
 			actorStruct *followedActorPtr = &actorTable[followedActorIdx];
@@ -340,13 +340,13 @@ void processTrack(void) {
 			             currentProcessedActorPtr->roomZ + currentProcessedActorPtr->modZ,
 			             currentProcessedActorPtr->beta, x, z);
 
-			if(currentProcessedActorPtr->rotate.param == 0 || currentProcessedActorPtr->field_72 != angleModif) {
+			if(currentProcessedActorPtr->rotate.param == 0 || currentProcessedActorPtr->rotateTarget != angleModif) {
 				startActorRotation(currentProcessedActorPtr->beta, currentProcessedActorPtr->beta - (angleModif << 8), 60, &currentProcessedActorPtr->rotate);
 			}
 
-			currentProcessedActorPtr->field_72 = angleModif;
+			currentProcessedActorPtr->rotateTarget = angleModif;
 
-			if(currentProcessedActorPtr->field_72 == 0) {
+			if(currentProcessedActorPtr->rotateTarget == 0) {
 				currentProcessedActorPtr->rotate.param = 0;
 			} else {
 				currentProcessedActorPtr->beta = updateActorRotation(&currentProcessedActorPtr->rotate);
@@ -408,7 +408,7 @@ void processTrack(void) {
 			currentProcessedActorPtr->zv.ZVZ2 += currentProcessedActorPtr->roomZ + currentProcessedActorPtr->modZ;
 
 			currentProcessedActorPtr->speed = 0;
-			currentProcessedActorPtr->field_72 = 0;
+			currentProcessedActorPtr->rotateTarget = 0;
 			currentProcessedActorPtr->rotate.param = 0;
 			currentProcessedActorPtr->positionInTrack += 5;
 
@@ -446,11 +446,11 @@ void processTrack(void) {
 				                 currentProcessedActorPtr->beta,
 				                 x, z);
 
-				if(currentProcessedActorPtr->rotate.param == 0 || currentProcessedActorPtr->field_72 != angleModif) {
+				if(currentProcessedActorPtr->rotate.param == 0 || currentProcessedActorPtr->rotateTarget != angleModif) {
 					startActorRotation(currentProcessedActorPtr->beta, currentProcessedActorPtr->beta - (angleModif << 6), 15, &currentProcessedActorPtr->rotate);
 				}
 
-				currentProcessedActorPtr->field_72 = angleModif;
+				currentProcessedActorPtr->rotateTarget = angleModif;
 
 				if(!angleModif) {
 					currentProcessedActorPtr->rotate.param = 0;
@@ -499,9 +499,9 @@ void processTrack(void) {
 			trackPtr += 2;
 
 			if(((currentProcessedActorPtr->beta - betaDif) & 0x3FF) > 0x200) {
-				currentProcessedActorPtr->field_72 = 1;
+				currentProcessedActorPtr->rotateTarget = 1;
 			} else {
-				currentProcessedActorPtr->field_72 = -1;
+				currentProcessedActorPtr->rotateTarget = -1;
 			}
 
 			if(!currentProcessedActorPtr->rotate.param) {
@@ -511,7 +511,7 @@ void processTrack(void) {
 			currentProcessedActorPtr->beta = updateActorRotation(&currentProcessedActorPtr->rotate);
 
 			if(currentProcessedActorPtr->beta == betaDif) {
-				currentProcessedActorPtr->field_72 = 0;
+				currentProcessedActorPtr->rotateTarget = 0;
 
 				currentProcessedActorPtr->positionInTrack += 2;
 			}
@@ -539,7 +539,7 @@ void processTrack(void) {
 			break;
 		}
 		case 0x10: {
-			int32 objNum = currentProcessedActorPtr->field_0;
+			int32 objNum = currentProcessedActorPtr->ID;
 
 			objectTable[objNum].x = currentProcessedActorPtr->roomX + currentProcessedActorPtr->modX;
 			objectTable[objNum].y = currentProcessedActorPtr->roomY + currentProcessedActorPtr->modY;
@@ -564,9 +564,9 @@ void processTrack(void) {
 			z = *(int16 *)(trackPtr);
 			trackPtr += 2;
 
-			objX = objectTable[currentProcessedActorPtr->field_0].x;
-			objY = objectTable[currentProcessedActorPtr->field_0].y;
-			objZ = objectTable[currentProcessedActorPtr->field_0].z;
+			objX = objectTable[currentProcessedActorPtr->ID].x;
+			objY = objectTable[currentProcessedActorPtr->ID].y;
+			objZ = objectTable[currentProcessedActorPtr->ID].z;
 
 			if(currentProcessedActorPtr->roomY + currentProcessedActorPtr->modY < y - 100
 			        ||  currentProcessedActorPtr->roomY + currentProcessedActorPtr->modY > y + 100) {
@@ -585,11 +585,11 @@ void processTrack(void) {
 				             currentProcessedActorPtr->beta,
 				             x, z);
 
-				if(!currentProcessedActorPtr->rotate.param || currentProcessedActorPtr->field_72 != angleModif) {
+				if(!currentProcessedActorPtr->rotate.param || currentProcessedActorPtr->rotateTarget != angleModif) {
 					startActorRotation(currentProcessedActorPtr->beta, currentProcessedActorPtr->beta - (angleModif << 8), 60, &currentProcessedActorPtr->rotate);
 				}
 
-				currentProcessedActorPtr->field_72 = angleModif;
+				currentProcessedActorPtr->rotateTarget = angleModif;
 
 				if(angleModif) {
 					currentProcessedActorPtr->beta = updateActorRotation(&currentProcessedActorPtr->rotate);
@@ -626,9 +626,9 @@ void processTrack(void) {
 			z = *(int16 *)(trackPtr);
 			trackPtr += 2;
 
-			objX = objectTable[currentProcessedActorPtr->field_0].x;
-			objY = objectTable[currentProcessedActorPtr->field_0].y;
-			objZ = objectTable[currentProcessedActorPtr->field_0].z;
+			objX = objectTable[currentProcessedActorPtr->ID].x;
+			objY = objectTable[currentProcessedActorPtr->ID].y;
+			objZ = objectTable[currentProcessedActorPtr->ID].z;
 
 			if(currentProcessedActorPtr->roomY + currentProcessedActorPtr->modY < y - 100
 			        ||  currentProcessedActorPtr->roomY + currentProcessedActorPtr->modY > y + 100) {
@@ -648,11 +648,11 @@ void processTrack(void) {
 				             currentProcessedActorPtr->beta,
 				             x, z);
 
-				if(!currentProcessedActorPtr->rotate.param || currentProcessedActorPtr->field_72 != angleModif) {
+				if(!currentProcessedActorPtr->rotate.param || currentProcessedActorPtr->rotateTarget != angleModif) {
 					startActorRotation(currentProcessedActorPtr->beta, currentProcessedActorPtr->beta - (angleModif << 8), 60, &currentProcessedActorPtr->rotate);
 				}
 
-				currentProcessedActorPtr->field_72 = angleModif;
+				currentProcessedActorPtr->rotateTarget = angleModif;
 
 				if(angleModif) {
 					currentProcessedActorPtr->beta = updateActorRotation(&currentProcessedActorPtr->rotate);
@@ -682,7 +682,7 @@ void processTrack(void) {
 			currentProcessedActorPtr->gamma = *(int16 *)(trackPtr);
 			trackPtr += 2;
 
-			currentProcessedActorPtr->field_72 = 0;
+			currentProcessedActorPtr->rotateTarget = 0;
 
 			currentProcessedActorPtr->positionInTrack += 4;
 
@@ -738,7 +738,7 @@ void processTrack2(void) {
 		int32 followedActorIdx = objectTable[currentProcessedActorPtr->trackNumber].ownerIdx;
 
 		if(followedActorIdx == -1) {
-			currentProcessedActorPtr->field_72 = 0;
+			currentProcessedActorPtr->rotateTarget = 0;
 			currentProcessedActorPtr->speed = 0;
 		} else {
 			actorStruct *followedActorPtr = &actorTable[followedActorIdx];
@@ -761,13 +761,13 @@ void processTrack2(void) {
 			             currentProcessedActorPtr->roomZ + currentProcessedActorPtr->modZ,
 			             currentProcessedActorPtr->beta, x, z);
 
-			if(currentProcessedActorPtr->rotate.param == 0 || currentProcessedActorPtr->field_72 != angleModif) {
+			if(currentProcessedActorPtr->rotate.param == 0 || currentProcessedActorPtr->rotateTarget != angleModif) {
 				startActorRotation(currentProcessedActorPtr->beta, currentProcessedActorPtr->beta - (angleModif << 8), 60, &currentProcessedActorPtr->rotate);
 			}
 
-			currentProcessedActorPtr->field_72 = angleModif;
+			currentProcessedActorPtr->rotateTarget = angleModif;
 
-			if(currentProcessedActorPtr->field_72 == 0) {
+			if(currentProcessedActorPtr->rotateTarget == 0) {
 				currentProcessedActorPtr->rotate.param = 0;
 			} else {
 				currentProcessedActorPtr->beta = updateActorRotation(&currentProcessedActorPtr->rotate);
@@ -829,7 +829,7 @@ void processTrack2(void) {
 			currentProcessedActorPtr->zv.ZVZ2 += currentProcessedActorPtr->roomZ + currentProcessedActorPtr->modZ;
 
 			currentProcessedActorPtr->speed = 0;
-			currentProcessedActorPtr->field_72 = 0;
+			currentProcessedActorPtr->rotateTarget = 0;
 			currentProcessedActorPtr->rotate.param = 0;
 			currentProcessedActorPtr->positionInTrack += 5;
 
@@ -867,11 +867,11 @@ void processTrack2(void) {
 				                 currentProcessedActorPtr->beta,
 				                 x, z);
 
-				if(currentProcessedActorPtr->rotate.param == 0 || currentProcessedActorPtr->field_72 != angleModif) {
+				if(currentProcessedActorPtr->rotate.param == 0 || currentProcessedActorPtr->rotateTarget != angleModif) {
 					startActorRotation(currentProcessedActorPtr->beta, currentProcessedActorPtr->beta - (angleModif << 6), 15, &currentProcessedActorPtr->rotate);
 				}
 
-				currentProcessedActorPtr->field_72 = angleModif;
+				currentProcessedActorPtr->rotateTarget = angleModif;
 
 				if(!angleModif) {
 					currentProcessedActorPtr->rotate.param = 0;
@@ -908,9 +908,9 @@ void processTrack2(void) {
 			trackPtr += 2;
 
 			if(((currentProcessedActorPtr->beta - betaDif) & 0x3FF) > 0x200) {
-				currentProcessedActorPtr->field_72 = 1;
+				currentProcessedActorPtr->rotateTarget = 1;
 			} else {
-				currentProcessedActorPtr->field_72 = -1;
+				currentProcessedActorPtr->rotateTarget = -1;
 			}
 
 			if(!currentProcessedActorPtr->rotate.param) {
@@ -920,7 +920,7 @@ void processTrack2(void) {
 			currentProcessedActorPtr->beta = updateActorRotation(&currentProcessedActorPtr->rotate);
 
 			if(currentProcessedActorPtr->beta == betaDif) {
-				currentProcessedActorPtr->field_72 = 0;
+				currentProcessedActorPtr->rotateTarget = 0;
 
 				currentProcessedActorPtr->positionInTrack += 2;
 			}
@@ -949,7 +949,7 @@ void processTrack2(void) {
 		}/*
                 case 0x10:
                 {
-                int objNum = currentProcessedActorPtr->field_0;
+                int objNum = currentProcessedActorPtr->ID;
 
                 objectTable[objNum].x = currentProcessedActorPtr->roomX + currentProcessedActorPtr->modX;
                 objectTable[objNum].y = currentProcessedActorPtr->roomY + currentProcessedActorPtr->modY;
@@ -975,9 +975,9 @@ void processTrack2(void) {
                 z = *(int16*)(trackPtr);
                 trackPtr += 2;
 
-                objX = objectTable[currentProcessedActorPtr->field_0].x;
-                objY = objectTable[currentProcessedActorPtr->field_0].y;
-                objZ = objectTable[currentProcessedActorPtr->field_0].z;
+                objX = objectTable[currentProcessedActorPtr->ID].x;
+                objY = objectTable[currentProcessedActorPtr->ID].y;
+                objZ = objectTable[currentProcessedActorPtr->ID].z;
 
                 if(   currentProcessedActorPtr->roomY + currentProcessedActorPtr->modY < y - 100
                 ||  currentProcessedActorPtr->roomY + currentProcessedActorPtr->modY > y + 100)
@@ -997,12 +997,12 @@ void processTrack2(void) {
                 currentProcessedActorPtr->beta,
                 x,z );
 
-                if(!currentProcessedActorPtr->rotate.param || currentProcessedActorPtr->field_72 != angleModif)
+                if(!currentProcessedActorPtr->rotate.param || currentProcessedActorPtr->rotateTarget != angleModif)
                 {
                 startActorRotation(currentProcessedActorPtr->beta, currentProcessedActorPtr->beta - (angleModif<<8), 60, &currentProcessedActorPtr->rotate);
                 }
 
-                currentProcessedActorPtr->field_72 = angleModif;
+                currentProcessedActorPtr->rotateTarget = angleModif;
 
                 if(angleModif)
                 {
@@ -1045,9 +1045,9 @@ void processTrack2(void) {
                 z = *(int16*)(trackPtr);
                 trackPtr += 2;
 
-                objX = objectTable[currentProcessedActorPtr->field_0].x;
-                objY = objectTable[currentProcessedActorPtr->field_0].y;
-                objZ = objectTable[currentProcessedActorPtr->field_0].z;
+                objX = objectTable[currentProcessedActorPtr->ID].x;
+                objY = objectTable[currentProcessedActorPtr->ID].y;
+                objZ = objectTable[currentProcessedActorPtr->ID].z;
 
                 if(   currentProcessedActorPtr->roomY + currentProcessedActorPtr->modY < y - 100
                 ||  currentProcessedActorPtr->roomY + currentProcessedActorPtr->modY > y + 100)
@@ -1068,12 +1068,12 @@ void processTrack2(void) {
                 currentProcessedActorPtr->beta,
                 x,z );
 
-                if(!currentProcessedActorPtr->rotate.param || currentProcessedActorPtr->field_72 != angleModif)
+                if(!currentProcessedActorPtr->rotate.param || currentProcessedActorPtr->rotateTarget != angleModif)
                 {
                 startActorRotation(currentProcessedActorPtr->beta, currentProcessedActorPtr->beta - (angleModif<<8), 60, &currentProcessedActorPtr->rotate);
                 }
 
-                currentProcessedActorPtr->field_72 = angleModif;
+                currentProcessedActorPtr->rotateTarget = angleModif;
 
                 if(angleModif)
                 {
@@ -1109,7 +1109,7 @@ void processTrack2(void) {
                 currentProcessedActorPtr->gamma = *(int16*)(trackPtr);
                 trackPtr += 2;
 
-                currentProcessedActorPtr->field_72 = 0;
+                currentProcessedActorPtr->rotateTarget = 0;
 
                 currentProcessedActorPtr->positionInTrack +=4;
 

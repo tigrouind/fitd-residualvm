@@ -108,7 +108,7 @@ void updateInHand(int objIdx) {
 		int currentActorEntry = NUM_MAX_ACTOR - 1;
 
 		while(currentActorEntry >= 0) {
-			if(currentActorEntryPtr->field_0 == -1)
+			if(currentActorEntryPtr->ID == -1)
 				break;
 
 			currentActorEntryPtr--;
@@ -128,7 +128,7 @@ void updateInHand(int objIdx) {
 		currentProcessedActorIdx = actorIdx;
 		currentLifeActorIdx = actorIdx;
 
-		currentProcessedActorPtr->field_0 = objIdx;
+		currentProcessedActorPtr->ID = objIdx;
 		currentProcessedActorPtr->life = -1;
 		currentProcessedActorPtr->bodyNum = -1;
 		currentProcessedActorPtr->flags = 0;
@@ -141,7 +141,7 @@ void updateInHand(int objIdx) {
 	processLife(foundLife);
 
 	if(var_2) {
-		currentProcessedActorPtr->field_0 = -1;
+		currentProcessedActorPtr->ID = -1;
 	}
 
 	currentProcessedActorPtr = currentActorPtr;
@@ -790,7 +790,7 @@ void initEngine() {
 
 
 	for(int i = 0; i < NUM_MAX_ACTOR; i++) {
-		actorTable[i].field_0 = -1;
+		actorTable[i].ID = -1;
 	}
 
 	if(g_fitd->getGameType() == GType_AITD1) {
@@ -886,8 +886,8 @@ void setupSMCode(int centerX, int centerY, int x, int y, int z) {
 void updateAllActorAndObjectsSub1(int index) { // remove actor
 	actorStruct *actorPtr = &actorTable[index];
 
-	if(actorPtr->field_0 == -2) { // flow
-		actorPtr->field_0 = -1;
+	if(actorPtr->ID == -2) { // flow
+		actorPtr->ID = -1;
 
 		if(actorPtr->ANIM == 4) {
 			CVars[getCVarsIdx(FOG_FLAG)] = 0;
@@ -895,17 +895,17 @@ void updateAllActorAndObjectsSub1(int index) { // remove actor
 
 		printTextSub6(hqrUnk, actorPtr->FRAME);
 	} else {
-		if(actorPtr->field_0 >= 0) {
-			objectStruct *objectPtr = &objectTable[actorPtr->field_0];
+		if(actorPtr->ID >= 0) {
+			objectStruct *objectPtr = &objectTable[actorPtr->ID];
 
 			objectPtr->ownerIdx = -1;
-			actorPtr->field_0 = -1;
+			actorPtr->ID = -1;
 
 			objectPtr->body = actorPtr->bodyNum;
 			objectPtr->anim = actorPtr->ANIM;
 			objectPtr->frame = actorPtr->FRAME;
-			objectPtr->animType = actorPtr->field_40;
-			objectPtr->animInfo = actorPtr->field_42;
+			objectPtr->animType = actorPtr->animType;
+			objectPtr->animInfo = actorPtr->animInfo;
 			objectPtr->flags = actorPtr->flags & 0xFFF7;
 			objectPtr->flags |= actorPtr->dynFlags << 5; // ???!!!?
 			objectPtr->life = actorPtr->life;
@@ -1139,7 +1139,7 @@ void updateAllActorAndObjectsAITD2() {
 	objectStruct *currentObject;
 
 	for(i = 0; i < NUM_MAX_ACTOR; i++) {
-		if(currentActor->field_0 != -1) {
+		if(currentActor->ID != -1) {
 			currentActor->lifeMode &= 0xFFFB;
 
 			if(currentActor->stage == currentEtage) {
@@ -1246,7 +1246,7 @@ void updateAllActorAndObjectsAITD2() {
 						//int var_A = currentObject->anim;
 
 addObject:
-						actorIdx = copyObjectToActor(currentObject->body, currentObject->field_6, currentObject->foundName,
+						actorIdx = copyObjectToActor(currentObject->body, currentObject->zvType, currentObject->foundName,
 						                             currentObject->flags & 0xFFDF,
 						                             currentObject->x, currentObject->y, currentObject->z,
 						                             currentObject->stage, currentObject->room,
@@ -1268,7 +1268,7 @@ addObject:
 							currentProcessedActorPtr->life = currentObject->life;
 							currentProcessedActorPtr->lifeMode = currentObject->lifeMode;
 
-							currentProcessedActorPtr->field_0 = i;
+							currentProcessedActorPtr->ID = i;
 
 							setMoveMode(currentObject->trackMode, currentObject->trackNumber);
 
@@ -1305,7 +1305,7 @@ void updateAllActorAndObjects() {
 	}
 
 	for(i = 0; i < NUM_MAX_ACTOR; i++) {
-		if(currentActor->field_0 != -1) {
+		if(currentActor->ID != -1) {
 			if(currentActor->stage == currentEtage) {
 				if(currentActor->life != -1) {
 					switch(currentActor->lifeMode) {
@@ -1377,7 +1377,7 @@ void updateAllActorAndObjects() {
 						//int var_A = currentObject->anim;
 
 addObject:
-						actorIdx = copyObjectToActor(currentObject->body, currentObject->field_6, currentObject->foundName,
+						actorIdx = copyObjectToActor(currentObject->body, currentObject->zvType, currentObject->foundName,
 						                             currentObject->flags & 0xFFDF,
 						                             currentObject->x, currentObject->y, currentObject->z,
 						                             currentObject->stage, currentObject->room,
@@ -1399,7 +1399,7 @@ addObject:
 							currentProcessedActorPtr->life = currentObject->life;
 							currentProcessedActorPtr->lifeMode = currentObject->lifeMode;
 
-							currentProcessedActorPtr->field_0 = i;
+							currentProcessedActorPtr->ID = i;
 
 							setMoveMode(currentObject->trackMode, currentObject->trackNumber);
 
@@ -1444,7 +1444,7 @@ void createActorList() {
 	actorPtr = actorTable;
 
 	for(i = 0; i < NUM_MAX_ACTOR; i++) {
-		if(actorPtr->field_0 != -1 && actorPtr->bodyNum != -1) {
+		if(actorPtr->ID != -1 && actorPtr->bodyNum != -1) {
 			if(checkActorInRoom(actorPtr->room)) {
 				sortedActorTable[numActorInList] = i;
 				if(!(actorPtr->flags & 0x21)) {
@@ -1522,12 +1522,12 @@ void deleteSub(int actorIdx) {
 
 	//  objModifFlag2 = 1;
 
-	BBox3D1 = actorPtr->field_14;
+	BBox3D1 = actorPtr->BBox3D1;
 
 	if(BBox3D1 > -1) {
-		BBox3D2 = actorPtr->field_16;
-		BBox3D3 = actorPtr->field_18;
-		BBox3D4 = actorPtr->field_1A;
+		BBox3D2 = actorPtr->BBox3D2;
+		BBox3D3 = actorPtr->BBox3D3;
+		BBox3D4 = actorPtr->BBox3D4;
 
 		//deleteSubSub();
 	}
@@ -2023,8 +2023,8 @@ void putAt(int objIdx, int objIdxToPutAt) {
 			currentProcessedActorPtr->beta = actorToPutAtPtr->beta;
 			currentProcessedActorPtr->gamma = actorToPutAtPtr->gamma;
 
-			objectTable[currentProcessedActorPtr->field_0].flags2 |= 0x4000;
-			objectTable[currentProcessedActorPtr->field_0].flags |= 0x80;
+			objectTable[currentProcessedActorPtr->ID].flags2 |= 0x4000;
+			objectTable[currentProcessedActorPtr->ID].flags |= 0x80;
 
 			//      objModifFlag1 = 1;
 			//      objModifFlag2 = 1;
@@ -2058,8 +2058,8 @@ void putAt(int objIdx, int objIdxToPutAt) {
 			currentProcessedActorPtr->beta = objPtrToPutAt->beta;
 			currentProcessedActorPtr->gamma = objPtrToPutAt->gamma;
 
-			objectTable[currentProcessedActorPtr->field_0].flags2 |= 0x4000;
-			objectTable[currentProcessedActorPtr->field_0].flags |= 0x80;
+			objectTable[currentProcessedActorPtr->ID].flags2 |= 0x4000;
+			objectTable[currentProcessedActorPtr->ID].flags |= 0x80;
 
 			//      objModifFlag1 = 1;
 			//      objModifFlag2 = 1;
@@ -2150,8 +2150,8 @@ void throwStoppedAt(int x, int z) {
 	currentProcessedActorPtr->zv.ZVZ1 += z2;
 	currentProcessedActorPtr->zv.ZVZ2 += z2;
 
-	objectTable[currentProcessedActorPtr->field_0].flags2 |= 0x4000;
-	objectTable[currentProcessedActorPtr->field_0].flags2 &= 0xEFFF;
+	objectTable[currentProcessedActorPtr->ID].flags2 |= 0x4000;
+	objectTable[currentProcessedActorPtr->ID].flags2 &= 0xEFFF;
 
 	stopAnim(currentProcessedActorIdx);
 }
@@ -2272,7 +2272,7 @@ void hit(int animNumber, int arg_2, int arg_4, int arg_6, int hitForce, int arg_
 		currentProcessedActorPtr->animActionFRAME = arg_2;
 		currentProcessedActorPtr->animActionType = 1;
 		currentProcessedActorPtr->animActionParam = arg_6;
-		currentProcessedActorPtr->field_98 = arg_4;
+		currentProcessedActorPtr->animActionHotpoint = arg_4;
 		currentProcessedActorPtr->hitForce = hitForce;
 	}
 }

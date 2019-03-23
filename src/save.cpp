@@ -141,8 +141,8 @@ int loadSave(int saveNumber) {
 		ASSERT(sizeof(objectTable[i].flags) == 2);
 		fread(&objectTable[i].flags, 2, 1, fHandle);
 
-		ASSERT(sizeof(objectTable[i].field_6) == 2);
-		fread(&objectTable[i].field_6, 2, 1, fHandle);
+		ASSERT(sizeof(objectTable[i].zvType) == 2);
+		fread(&objectTable[i].zvType, 2, 1, fHandle);
 
 		ASSERT(sizeof(objectTable[i].foundBody) == 2);
 		fread(&objectTable[i].foundBody, 2, 1, fHandle);
@@ -300,8 +300,8 @@ int loadSave(int saveNumber) {
 	fseek(fHandle, offsetToVars, SEEK_SET);
 
 	for(i = 0; i < NUM_MAX_ACTOR; i++) {
-		ASSERT(sizeof(actorTable[i].field_0) == 2);
-		fread(&actorTable[i].field_0, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].ID) == 2);
+		fread(&actorTable[i].ID, 2, 1, fHandle);
 
 		ASSERT(sizeof(actorTable[i].bodyNum) == 2);
 		fread(&actorTable[i].bodyNum, 2, 1, fHandle);
@@ -336,17 +336,17 @@ int loadSave(int saveNumber) {
 		fread(&actorTable[i].zv.ZVZ2, 2, 1, fHandle);
 		actorTable[i].zv.ZVZ2 = (short int)actorTable[i].zv.ZVZ2;
 
-		ASSERT(sizeof(actorTable[i].field_14) == 2);
-		fread(&actorTable[i].field_14, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].BBox3D1) == 2);
+		fread(&actorTable[i].BBox3D1, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_16) == 2);
-		fread(&actorTable[i].field_16, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].BBox3D2) == 2);
+		fread(&actorTable[i].BBox3D2, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_18) == 2);
-		fread(&actorTable[i].field_18, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].BBox3D3) == 2);
+		fread(&actorTable[i].BBox3D3, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_1A) == 2);
-		fread(&actorTable[i].field_1A, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].BBox3D4) == 2);
+		fread(&actorTable[i].BBox3D4, 2, 1, fHandle);
 
 		ASSERT(sizeof(actorTable[i].roomX) == 2);
 		fread(&actorTable[i].roomX, 2, 1, fHandle);
@@ -396,26 +396,26 @@ int loadSave(int saveNumber) {
 		ASSERT(sizeof(actorTable[i].ANIM) == 2);
 		fread(&actorTable[i].ANIM, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_40) == 2);
-		fread(&actorTable[i].field_40, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].animType) == 2);
+		fread(&actorTable[i].animType, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_42) == 2);
-		fread(&actorTable[i].field_42, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].animInfo) == 2);
+		fread(&actorTable[i].animInfo, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_44) == 2);
-		fread(&actorTable[i].field_44, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].nextAnim) == 2);
+		fread(&actorTable[i].nextAnim, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_46) == 2);
-		fread(&actorTable[i].field_46, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].nextAnimType) == 2);
+		fread(&actorTable[i].nextAnimType, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_48) == 2);
-		fread(&actorTable[i].field_48, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].nextAnimInfo) == 2);
+		fread(&actorTable[i].nextAnimInfo, 2, 1, fHandle);
 
 		ASSERT(sizeof(actorTable[i].FRAME) == 2);
 		fread(&actorTable[i].FRAME, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_4C) == 2);
-		fread(&actorTable[i].field_4C, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].nextAnimParam) == 2);
+		fread(&actorTable[i].nextAnimParam, 2, 1, fHandle);
 
 		ASSERT(sizeof(actorTable[i].END_FRAME) == 2);
 		fread(&actorTable[i].END_FRAME, 2, 1, fHandle);
@@ -444,15 +444,15 @@ int loadSave(int saveNumber) {
 		ASSERT(sizeof(actorTable[i].modZ) == 2); // 45
 		fread(&actorTable[i].modZ, 2, 1, fHandle);
 
-		loadRotateStruc(&actorTable[i].field_60, fHandle);
+		loadRotateStruc(&actorTable[i].fall, fHandle);
 
 		ASSERT(sizeof(actorTable[i].falling) == 2);
 		fread(&actorTable[i].falling, 2, 1, fHandle);
 
 		loadRotateStruc(&actorTable[i].rotate, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_72) == 2);
-		fread(&actorTable[i].field_72, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].rotateTarget) == 2);
+		fread(&actorTable[i].rotateTarget, 2, 1, fHandle);
 
 		ASSERT(sizeof(actorTable[i].speed) == 2);
 		fread(&actorTable[i].speed, 2, 1, fHandle);
@@ -498,8 +498,8 @@ int loadSave(int saveNumber) {
 		ASSERT(sizeof(actorTable[i].hitForce) == 2);
 		fread(&actorTable[i].hitForce, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_98) == 2);
-		fread(&actorTable[i].field_98, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].animActionHotpoint) == 2);
+		fread(&actorTable[i].animActionHotpoint, 2, 1, fHandle);
 
 		ASSERT(sizeof(actorTable[i].hotPoint.x) == 2);
 		fread(&actorTable[i].hotPoint.x, 2, 1, fHandle);
@@ -513,7 +513,7 @@ int loadSave(int saveNumber) {
 	fclose(fHandle);
 
 	for(i = 0; i < NUM_MAX_ACTOR; i++) {
-		if(actorTable[i].field_0 != -1 && actorTable[i].bodyNum != -1) {
+		if(actorTable[i].ID != -1 && actorTable[i].bodyNum != -1) {
 			char *bodyPtr = listBody->get(actorTable[i].bodyNum);
 
 			if(actorTable[i].ANIM != -1) {
@@ -567,7 +567,7 @@ int makeSaveFile(int entry) {
 	int oldNumMaxObj;
 
 	for(i = 0; i < NUM_MAX_ACTOR; i++) {
-		if(actorTable[i].field_0 == -1);
+		if(actorTable[i].ID == -1);
 
 		if(actorTable[i].ANIM == 4) {
 			CVars[getCVarsIdx(FOG_FLAG)] = 0;
@@ -626,8 +626,8 @@ int makeSaveFile(int entry) {
 		ASSERT(sizeof(objectTable[i].flags) == 2);
 		fwrite(&objectTable[i].flags, 2, 1, fHandle);
 
-		ASSERT(sizeof(objectTable[i].field_6) == 2);
-		fwrite(&objectTable[i].field_6, 2, 1, fHandle);
+		ASSERT(sizeof(objectTable[i].zvType) == 2);
+		fwrite(&objectTable[i].zvType, 2, 1, fHandle);
 
 		ASSERT(sizeof(objectTable[i].foundBody) == 2);
 		fwrite(&objectTable[i].foundBody, 2, 1, fHandle);
@@ -770,8 +770,8 @@ int makeSaveFile(int entry) {
 
 	for(i = 0; i < NUM_MAX_ACTOR; i++) {
 
-		ASSERT(sizeof(actorTable[i].field_0) == 2);
-		fwrite(&actorTable[i].field_0, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].ID) == 2);
+		fwrite(&actorTable[i].ID, 2, 1, fHandle);
 
 		ASSERT(sizeof(actorTable[i].bodyNum) == 2);
 		fwrite(&actorTable[i].bodyNum, 2, 1, fHandle);
@@ -802,17 +802,17 @@ int makeSaveFile(int entry) {
 		//    ASSERT(sizeof(actorTable[i].zv.ZVZ2) == 2);
 		fwrite(&actorTable[i].zv.ZVZ2, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_14) == 2);
-		fwrite(&actorTable[i].field_14, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].BBox3D1) == 2);
+		fwrite(&actorTable[i].BBox3D1, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_16) == 2);
-		fwrite(&actorTable[i].field_16, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].BBox3D2) == 2);
+		fwrite(&actorTable[i].BBox3D2, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_18) == 2);
-		fwrite(&actorTable[i].field_18, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].BBox3D3) == 2);
+		fwrite(&actorTable[i].BBox3D3, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_1A) == 2);
-		fwrite(&actorTable[i].field_1A, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].BBox3D4) == 2);
+		fwrite(&actorTable[i].BBox3D4, 2, 1, fHandle);
 
 		ASSERT(sizeof(actorTable[i].roomX) == 2);
 		fwrite(&actorTable[i].roomX, 2, 1, fHandle);
@@ -862,26 +862,26 @@ int makeSaveFile(int entry) {
 		ASSERT(sizeof(actorTable[i].ANIM) == 2);
 		fwrite(&actorTable[i].ANIM, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_40) == 2);
-		fwrite(&actorTable[i].field_40, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].animType) == 2);
+		fwrite(&actorTable[i].animType, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_42) == 2);
-		fwrite(&actorTable[i].field_42, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].animInfo) == 2);
+		fwrite(&actorTable[i].animInfo, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_44) == 2);
-		fwrite(&actorTable[i].field_44, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].nextAnim) == 2);
+		fwrite(&actorTable[i].nextAnim, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_46) == 2);
-		fwrite(&actorTable[i].field_46, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].nextAnimType) == 2);
+		fwrite(&actorTable[i].nextAnimType, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_48) == 2);
-		fwrite(&actorTable[i].field_48, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].nextAnimInfo) == 2);
+		fwrite(&actorTable[i].nextAnimInfo, 2, 1, fHandle);
 
 		ASSERT(sizeof(actorTable[i].FRAME) == 2);
 		fwrite(&actorTable[i].FRAME, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_4C) == 2);
-		fwrite(&actorTable[i].field_4C, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].nextAnimParam) == 2);
+		fwrite(&actorTable[i].nextAnimParam, 2, 1, fHandle);
 
 		ASSERT(sizeof(actorTable[i].END_FRAME) == 2);
 		fwrite(&actorTable[i].END_FRAME, 2, 1, fHandle);
@@ -910,15 +910,15 @@ int makeSaveFile(int entry) {
 		ASSERT(sizeof(actorTable[i].modZ) == 2); // 45
 		fwrite(&actorTable[i].modZ, 2, 1, fHandle);
 
-		saveRotateStruc(&actorTable[i].field_60, fHandle);
+		saveRotateStruc(&actorTable[i].fall, fHandle);
 
 		ASSERT(sizeof(actorTable[i].falling) == 2);
 		fwrite(&actorTable[i].falling, 2, 1, fHandle);
 
 		saveRotateStruc(&actorTable[i].rotate, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_72) == 2);
-		fwrite(&actorTable[i].field_72, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].rotateTarget) == 2);
+		fwrite(&actorTable[i].rotateTarget, 2, 1, fHandle);
 
 		ASSERT(sizeof(actorTable[i].speed) == 2);
 		fwrite(&actorTable[i].speed, 2, 1, fHandle);
@@ -964,8 +964,8 @@ int makeSaveFile(int entry) {
 		ASSERT(sizeof(actorTable[i].hitForce) == 2);
 		fwrite(&actorTable[i].hitForce, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].field_98) == 2);
-		fwrite(&actorTable[i].field_98, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].animActionHotpoint) == 2);
+		fwrite(&actorTable[i].animActionHotpoint, 2, 1, fHandle);
 
 		ASSERT(sizeof(actorTable[i].hotPoint.x) == 2);
 		fwrite(&actorTable[i].hotPoint.x, 2, 1, fHandle);

@@ -32,7 +32,7 @@ int processActor1Sub1(int actorIdx, ZVStruct *zvPtr) {
 	int actorRoom = actorTable[actorIdx].room;
 
 	for(int i = 0; i < NUM_MAX_ACTOR; i++) {
-		if(currentActor->field_0 != -1 && i != actorIdx) {
+		if(currentActor->ID != -1 && i != actorIdx) {
 			ZVStruct *currentActorZv = &currentActor->zv;
 
 			if(currentActor->room != actorRoom) {
@@ -83,7 +83,7 @@ int manageFall(int actorIdx, ZVStruct *zvPtr) {
 	for(i = 0; i < NUM_MAX_ACTOR; i++) {
 		actorStruct *currentTestedActorPtr = &actorTable[i];
 
-		if(currentTestedActorPtr->field_0 != -1 && i != actorIdx) {
+		if(currentTestedActorPtr->ID != -1 && i != actorIdx) {
 			ZVStruct *testedZv = &currentTestedActorPtr->zv;
 
 			if(currentTestedActorPtr->room != room) {
@@ -228,7 +228,7 @@ void hardColSuB1(ZVStruct *startZv, ZVStruct *zvPtr2, ZVStruct *zvPtr3) {
 
 void processActor1(void) {
 	int var_42 = 0;
-	int var_6 = currentProcessedActorPtr->field_44;
+	int var_6 = currentProcessedActorPtr->nextAnim;
 	int var_40;
 	int var_48 = 0;
 	int var_4A = 0;
@@ -247,9 +247,9 @@ void processActor1(void) {
 	if(var_6 != -1) { // next anim ?
 		if(var_6 == -2) { // completly stop anim
 			stopAnim(currentProcessedActorIdx);
-			currentProcessedActorPtr->field_44 = -1;
-			currentProcessedActorPtr->field_46 = 0;
-			currentProcessedActorPtr->field_48 = -1;
+			currentProcessedActorPtr->nextAnim = -1;
+			currentProcessedActorPtr->nextAnimType = 0;
+			currentProcessedActorPtr->nextAnimInfo = -1;
 			currentProcessedActorPtr->END_ANIM = 1;
 
 			return;
@@ -271,15 +271,15 @@ void processActor1(void) {
 			bufferAnimCounter = 0;
 
 		currentProcessedActorPtr->ANIM = var_6;
-		currentProcessedActorPtr->field_40 = currentProcessedActorPtr->field_46;
-		currentProcessedActorPtr->field_42 = currentProcessedActorPtr->field_48;
-		currentProcessedActorPtr->field_44 = -1;
-		currentProcessedActorPtr->field_46 = 0;
-		currentProcessedActorPtr->field_48 = -1;
+		currentProcessedActorPtr->animType = currentProcessedActorPtr->nextAnimType;
+		currentProcessedActorPtr->animInfo = currentProcessedActorPtr->nextAnimInfo;
+		currentProcessedActorPtr->nextAnim = -1;
+		currentProcessedActorPtr->nextAnimType = 0;
+		currentProcessedActorPtr->nextAnimInfo = -1;
 		currentProcessedActorPtr->END_ANIM = 0;
 		currentProcessedActorPtr->FRAME = 0;
 
-		currentProcessedActorPtr->field_4C = getAnimParam(listAnim->get(var_6));
+		currentProcessedActorPtr->nextAnimParam = getAnimParam(listAnim->get(var_6));
 	}
 
 	if(currentProcessedActorPtr->ANIM == -1) { // no animation
@@ -336,15 +336,15 @@ void processActor1(void) {
 
 	}
 
-	if(currentProcessedActorPtr->field_60.param) { // currently falling ?
-		if(currentProcessedActorPtr->field_60.param != -1) {
-			var_4E = processActor1Sub2(&currentProcessedActorPtr->field_60) - var_4A;
+	if(currentProcessedActorPtr->fall.param) { // currently falling ?
+		if(currentProcessedActorPtr->fall.param != -1) {
+			var_4E = processActor1Sub2(&currentProcessedActorPtr->fall) - var_4A;
 		} else { // stop falling
-			var_4E = currentProcessedActorPtr->field_60.newAngle - var_4A;
+			var_4E = currentProcessedActorPtr->fall.newAngle - var_4A;
 
-			currentProcessedActorPtr->field_60.param = 0;
-			currentProcessedActorPtr->field_60.newAngle = 0;
-			currentProcessedActorPtr->field_60.oldAngle = 0;
+			currentProcessedActorPtr->fall.param = 0;
+			currentProcessedActorPtr->fall.newAngle = 0;
+			currentProcessedActorPtr->fall.oldAngle = 0;
 		}
 	} else {
 		var_4E = 0;
@@ -424,7 +424,7 @@ void processActor1(void) {
 
 			if(actorTouchedPtr->bitField.tackable) { // takable
 				if(currentProcessedActorPtr->trackMode == 1 /*&& ((g_fitd->getGameType() == GType_AITD1 && defines.field_1E == 0) || (g_fitd->getGameType() >= GType_JACK && defines.field_6 == 0))*/) { // TODO: check if character isn't dead...
-					foundObject(actorTouchedPtr->field_0, 0);
+					foundObject(actorTouchedPtr->ID, 0);
 				}
 			} else {
 				if(actorTouchedPtr->flags & 0x10) { // can be pushed ?
@@ -535,7 +535,7 @@ void processActor1(void) {
 		currentProcessedActorPtr->zv.ZVZ2 += var_50;
 	} // end of movement management
 
-	if(!currentProcessedActorPtr->field_60.param) {
+	if(!currentProcessedActorPtr->fall.param) {
 		// fall management ?
 		currentProcessedActorPtr->worldY += currentProcessedActorPtr->modY;
 		currentProcessedActorPtr->roomY += currentProcessedActorPtr->modY;
@@ -550,13 +550,13 @@ void processActor1(void) {
 			zvLocal.ZVY2 += 100;
 
 			if(currentProcessedActorPtr->roomY < -10 && !checkForHardCol(&zvLocal, &roomDataTable[currentProcessedActorPtr->room]) && !manageFall(currentProcessedActorIdx, &zvLocal)) {
-				startActorRotation(0, 2000, 40, &currentProcessedActorPtr->field_60);
+				startActorRotation(0, 2000, 40, &currentProcessedActorPtr->fall);
 			} else {
 				currentProcessedActorPtr->falling = 0;
 			}
 		}
 	} else {
-		if((currentProcessedActorPtr->field_60.param != -1) && (currentProcessedActorPtr->flags & 0x100)) {
+		if((currentProcessedActorPtr->fall.param != -1) && (currentProcessedActorPtr->flags & 0x100)) {
 			currentProcessedActorPtr->falling = 1;
 		}
 	}
@@ -594,14 +594,14 @@ void processActor1(void) {
 	if(currentProcessedActorPtr->END_FRAME) { // key frame change
 		currentProcessedActorPtr->FRAME++;
 
-		if(currentProcessedActorPtr->FRAME >= currentProcessedActorPtr->field_4C) { // end of anim ?
+		if(currentProcessedActorPtr->FRAME >= currentProcessedActorPtr->nextAnimParam) { // end of anim ?
 			currentProcessedActorPtr->END_ANIM = 1; // end of anim
 			currentProcessedActorPtr->FRAME = 0; // restart anim
 
-			if(!(currentProcessedActorPtr->field_40 & 1) && (currentProcessedActorPtr->field_44 == -1)) { // is another anim waiting ?
-				currentProcessedActorPtr->field_40 &= 0xFFFD;
+			if(!(currentProcessedActorPtr->animType & 1) && (currentProcessedActorPtr->nextAnim == -1)) { // is another anim waiting ?
+				currentProcessedActorPtr->animType &= 0xFFFD;
 
-				anim(currentProcessedActorPtr->field_42, 1, -1);
+				anim(currentProcessedActorPtr->animInfo, 1, -1);
 			}
 		}
 		currentProcessedActorPtr->worldX += currentProcessedActorPtr->modX;
@@ -717,7 +717,7 @@ void processActor2() {
 	case 10: {
 		int life;
 
-		life = objectTable[currentProcessedActorPtr->field_0].field_24;
+		life = objectTable[currentProcessedActorPtr->ID].field_24;
 
 		if(life == -1)
 			return;

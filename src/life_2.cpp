@@ -170,7 +170,7 @@ processOpcode:
 
 				if(lifeTempVar1 == -1) {
 					currentProcessedActorPtr->ANIM = -1;
-					currentProcessedActorPtr->field_44 = -2;
+					currentProcessedActorPtr->nextAnim = -2;
 				} else {
 					anim(lifeTempVar1, 0, lifeTempVar2);
 				}
@@ -190,7 +190,7 @@ processOpcode:
 			case 0x3: { // BODY
 				lifeTempVar1 = evalVar2();
 
-				objectTable[currentProcessedActorPtr->field_0].body = lifeTempVar1;
+				objectTable[currentProcessedActorPtr->ID].body = lifeTempVar1;
 
 				if(currentProcessedActorPtr->bodyNum != lifeTempVar1) {
 					currentProcessedActorPtr->bodyNum = lifeTempVar1;
@@ -828,7 +828,7 @@ processOpcode:
 				currentProcessedActorPtr->animActionType = 8;
 				currentProcessedActorPtr->animActionParam = lifeTempVar1;
 				currentProcessedActorPtr->hitForce = lifeTempVar2;
-				currentProcessedActorPtr->field_98 = -1;
+				currentProcessedActorPtr->animActionHotpoint = -1;
 				break;
 			}
 			case 0x43: { // ANGLE
@@ -955,7 +955,7 @@ processOpcode:
 				break;
 			}
 			case 0x50: {
-				objectTable[currentProcessedActorPtr->field_0].field_24 = *(short int *)(currentLifePtr);
+				objectTable[currentProcessedActorPtr->ID].field_24 = *(short int *)(currentLifePtr);
 				currentLifePtr += 2;
 
 				break;
@@ -984,7 +984,7 @@ processOpcode:
 
 				if(param1 == -1) {
 					currentProcessedActorPtr->ANIM = -1;
-					currentProcessedActorPtr->field_44 = -2;
+					currentProcessedActorPtr->nextAnim = -2;
 				} else {
 					anim(param1, 4, param2);
 				}
@@ -1018,8 +1018,8 @@ processOpcode:
 				param1 = evalVar();
 				param2 = evalVar();
 
-				objectTable[currentProcessedActorPtr->field_0].body = param1;
-				objectTable[currentProcessedActorPtr->field_0].anim = param2;
+				objectTable[currentProcessedActorPtr->ID].body = param1;
+				objectTable[currentProcessedActorPtr->ID].anim = param2;
 
 				currentProcessedActorPtr->bodyNum = param1;
 

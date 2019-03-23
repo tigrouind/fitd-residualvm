@@ -52,7 +52,7 @@ void throwObj(int animThrow, int frameThrow, int arg_4, int objToThrowIdx, int t
 		currentProcessedActorPtr->animActionANIM = animThrow;
 		currentProcessedActorPtr->animActionFRAME = frameThrow;
 		currentProcessedActorPtr->animActionType = 6;
-		currentProcessedActorPtr->field_98 = arg_4;
+		currentProcessedActorPtr->animActionHotpoint = arg_4;
 		currentProcessedActorPtr->animActionParam = objToThrowIdx;
 		currentProcessedActorPtr->hitForce = throwForce;
 
@@ -92,7 +92,7 @@ void fire(int fireAnim, int X, int Y, int Z, int hitForce, int nextAnim) {
 		currentProcessedActorPtr->animActionFRAME = X;
 		currentProcessedActorPtr->animActionType = 4;
 		currentProcessedActorPtr->animActionParam = Z;
-		currentProcessedActorPtr->field_98 = Y;
+		currentProcessedActorPtr->animActionHotpoint = Y;
 		currentProcessedActorPtr->hitForce = hitForce;
 
 	}
@@ -109,7 +109,7 @@ int createFlow(int mode, int X, int Y, int Z, int stage, int room, int alpha, in
 	currentActorPtr = actorTable;
 
 	for(i = 0; i < NUM_MAX_ACTOR; i++) { // count the number of active actors
-		if(currentActorPtr->field_0 == -1)
+		if(currentActorPtr->ID == -1)
 			break;
 	}
 
@@ -118,7 +118,7 @@ int createFlow(int mode, int X, int Y, int Z, int stage, int room, int alpha, in
 	}
 
 	currentActorPtr->flags = 0x20;
-	currentActorPtr->field_0 = -2;
+	currentActorPtr->ID = -2;
 	currentActorPtr->life = -1;
 	currentActorPtr->lifeMode = 2;
 	currentActorPtr->bodyNum = 0;
@@ -162,7 +162,7 @@ int createFlow(int mode, int X, int Y, int Z, int stage, int room, int alpha, in
 		flowPtr = hqrUnk->printTextSub2(currentActorPtr->FRAME);
 
 		if(!flowPtr) {
-			currentActorPtr->field_0 = -1;
+			currentActorPtr->ID = -1;
 			return(-1);
 		}
 
@@ -624,7 +624,7 @@ processOpcode:
 			case LM_BODY: {
 				lifeTempVar1 = evalVar();
 
-				objectTable[currentProcessedActorPtr->field_0].body = lifeTempVar1;
+				objectTable[currentProcessedActorPtr->ID].body = lifeTempVar1;
 
 				if(currentProcessedActorPtr->bodyNum != lifeTempVar1) {
 					currentProcessedActorPtr->bodyNum = lifeTempVar1;
@@ -663,8 +663,8 @@ processOpcode:
 				param1 = evalVar();
 				param2 = evalVar();
 
-				objectTable[currentProcessedActorPtr->field_0].body = param1;
-				objectTable[currentProcessedActorPtr->field_0].anim = param2;
+				objectTable[currentProcessedActorPtr->ID].body = param1;
+				objectTable[currentProcessedActorPtr->ID].anim = param2;
 
 				currentProcessedActorPtr->bodyNum = param1;
 
@@ -788,7 +788,7 @@ processOpcode:
 
 				if(lifeTempVar1 == -1) {
 					currentProcessedActorPtr->ANIM = -1;
-					currentProcessedActorPtr->field_44 = -2;
+					currentProcessedActorPtr->nextAnim = -2;
 				} else {
 					anim(lifeTempVar1, 0, lifeTempVar2);
 				}
@@ -825,7 +825,7 @@ processOpcode:
 
 				if(param1 == -1) {
 					currentProcessedActorPtr->ANIM = -1;
-					currentProcessedActorPtr->field_44 = -2;
+					currentProcessedActorPtr->nextAnim = -2;
 				} else {
 					anim(param1, 4, param2);
 				}
@@ -925,7 +925,7 @@ processOpcode:
 				currentProcessedActorPtr->animActionType = 8;
 				currentProcessedActorPtr->animActionParam = lifeTempVar1;
 				currentProcessedActorPtr->hitForce = lifeTempVar2;
-				currentProcessedActorPtr->field_98 = -1;
+				currentProcessedActorPtr->animActionHotpoint = -1;
 				break;
 			}
 			case LM_STOP_HIT_OBJECT: { // cancel hit obj
@@ -933,7 +933,7 @@ processOpcode:
 					currentProcessedActorPtr->animActionType = 0;
 					currentProcessedActorPtr->animActionParam = 0;
 					currentProcessedActorPtr->hitForce = 0;
-					currentProcessedActorPtr->field_98 = -1;
+					currentProcessedActorPtr->animActionHotpoint = -1;
 				}
 
 				break;
@@ -1098,7 +1098,7 @@ processOpcode:
 				break;
 			}
 			case LM_UP_COOR_Y: { // UP_COOR_Y
-				startActorRotation(0, -2000, -1, &currentProcessedActorPtr->field_60);
+				startActorRotation(0, -2000, -1, &currentProcessedActorPtr->fall);
 				break;
 			}
 			////////////////////////////////////////////////////////////////////////
@@ -1108,7 +1108,7 @@ processOpcode:
 				break;
 			}
 			case LM_STAGE_LIFE: {
-				objectTable[currentProcessedActorPtr->field_0].field_24 = *(int16 *)(currentLifePtr);
+				objectTable[currentProcessedActorPtr->ID].field_24 = *(int16 *)(currentLifePtr);
 				currentLifePtr += 2;
 				break;
 			}
@@ -1302,31 +1302,31 @@ processOpcode:
 				break;
 			}
 			case LM_FOUND_NAME: { // FOUND_NAME
-				objectTable[currentProcessedActorPtr->field_0].foundName = *(int16 *)(currentLifePtr);
+				objectTable[currentProcessedActorPtr->ID].foundName = *(int16 *)(currentLifePtr);
 				currentLifePtr += 2;
 
 				break;
 			}
 			case LM_FOUND_BODY: { // FOUND_BODY
-				objectTable[currentProcessedActorPtr->field_0].foundBody = *(int16 *)(currentLifePtr);
+				objectTable[currentProcessedActorPtr->ID].foundBody = *(int16 *)(currentLifePtr);
 				currentLifePtr += 2;
 
 				break;
 			}
 			case LM_FOUND_FLAG: { // FOUND_FLAG
-				objectTable[currentProcessedActorPtr->field_0].flags2 &= 0xE000;
-				objectTable[currentProcessedActorPtr->field_0].flags2 |= *(int16 *)(currentLifePtr);
+				objectTable[currentProcessedActorPtr->ID].flags2 &= 0xE000;
+				objectTable[currentProcessedActorPtr->ID].flags2 |= *(int16 *)(currentLifePtr);
 				currentLifePtr += 2;
 				break;
 			}
 			case LM_FOUND_WEIGHT: { // FOUND_WEIGHT
-				objectTable[currentProcessedActorPtr->field_0].positionInTrack = *(int16 *)(currentLifePtr);
+				objectTable[currentProcessedActorPtr->ID].positionInTrack = *(int16 *)(currentLifePtr);
 				currentLifePtr += 2;
 
 				break;
 			}
 			case LM_FOUND_LIFE: { // FOUND_LIFE
-				objectTable[currentProcessedActorPtr->field_0].foundLife = *(int16 *)(currentLifePtr);
+				objectTable[currentProcessedActorPtr->ID].foundLife = *(int16 *)(currentLifePtr);
 				currentLifePtr += 2;
 
 				break;

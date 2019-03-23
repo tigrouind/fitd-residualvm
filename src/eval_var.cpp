@@ -217,7 +217,7 @@ int evalVar(void) {
 				int temp1 = actorPtr->COL[0];
 
 				if(temp1 != -1) {
-					return(actorTable[temp1].field_0);
+					return(actorTable[temp1].ID);
 				} else {
 					return(-1);
 				}
@@ -237,7 +237,7 @@ int evalVar(void) {
 				if(temp == -1) {
 					return(-1);
 				} else {
-					return(actorTable[temp].field_0);
+					return(actorTable[temp].ID);
 				}
 
 				break;
@@ -248,7 +248,7 @@ int evalVar(void) {
 				if(temp == -1) {
 					return(-1);
 				} else {
-					return(actorTable[temp].field_0);
+					return(actorTable[temp].ID);
 				}
 
 				break;
@@ -309,7 +309,7 @@ int evalVar(void) {
 				if(actorPtr->COL_BY == -1)
 					return(-1);
 				else
-					return(actorTable[actorPtr->COL_BY].field_0);
+					return(actorTable[actorPtr->COL_BY].ID);
 				break;
 			}
 			case 0x10: { // found
@@ -361,7 +361,7 @@ int evalVar(void) {
 				if(temp1 == -1)
 					return -1;
 
-				return actorTable[temp1].field_0;
+				return actorTable[temp1].ID;
 				break;
 			}
 			case 0x16: {
@@ -530,7 +530,7 @@ int evalVar2(void) {
 				int temp1 = actorPtr->COL[0];
 
 				if(temp1 != -1) {
-					return(actorTable[temp1].field_0);
+					return(actorTable[temp1].ID);
 				} else {
 					return(-1);
 				}
@@ -550,7 +550,7 @@ int evalVar2(void) {
 				if(temp == -1) {
 					return(-1);
 				} else {
-					return(actorTable[temp].field_0);
+					return(actorTable[temp].ID);
 				}
 
 				break;
@@ -561,7 +561,7 @@ int evalVar2(void) {
 				if(temp == -1) {
 					return(-1);
 				} else {
-					return(actorTable[temp].field_0);
+					return(actorTable[temp].ID);
 				}
 
 				break;
@@ -622,7 +622,7 @@ int evalVar2(void) {
 				if(actorPtr->COL_BY == -1)
 					return(-1);
 				else
-					return(actorTable[actorPtr->COL_BY].field_0);
+					return(actorTable[actorPtr->COL_BY].ID);
 				break;
 			}
 			case 0x10: { // found
@@ -674,7 +674,7 @@ int evalVar2(void) {
 				if(temp1 == -1)
 					return -1;
 
-				return actorTable[temp1].field_0;
+				return actorTable[temp1].ID;
 				break;
 			}
 			case 0x16: {

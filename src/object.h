@@ -31,7 +31,7 @@ struct objectStruct {
 		int16 flags;
 		actorFlags bitField;
 	};
-	int16 field_6;
+	int16 zvType;
 	int16 foundBody;
 	int16 foundName;
 	int16 flags2;

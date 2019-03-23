@@ -388,10 +388,10 @@ void drawBgOverlay(actorStruct *actorPtr) {
 	int i;
 	int numOverlayZone;
 
-	actorPtr->field_14 = BBox3D1;
-	actorPtr->field_16 = BBox3D2;
-	actorPtr->field_18 = BBox3D3;
-	actorPtr->field_1A = BBox3D4;
+	actorPtr->BBox3D1 = BBox3D1;
+	actorPtr->BBox3D2 = BBox3D2;
+	actorPtr->BBox3D3 = BBox3D3;
+	actorPtr->BBox3D4 = BBox3D4;
 
 	setClipSize(BBox3D1, BBox3D2, BBox3D3, BBox3D4);
 
@@ -580,8 +580,8 @@ void mainDraw(int mode) {
 				            actorPtr->alpha, actorPtr->beta, actorPtr->gamma, bodyPtr);
 
 
-				if(actorPtr->animActionType && actorPtr->field_98 != -1) {
-					getHotPoint(actorPtr->field_98, bodyPtr, &actorPtr->hotPoint);
+				if(actorPtr->animActionType && actorPtr->animActionHotpoint != -1) {
+					getHotPoint(actorPtr->animActionHotpoint, bodyPtr, &actorPtr->hotPoint);
 				}
 
 				///////////////////////////////////// DEBUG
@@ -607,7 +607,7 @@ void mainDraw(int mode) {
 
 			if(BBox3D1 <= 319 && BBox3D2 <= 199 && BBox3D3 >= 0 && BBox3D4 >= 0) { // is the character on screen ?
 				if(g_fitd->getGameType() == GType_AITD1) {
-					if(actorPtr->field_0 == CVars[getCVarsIdx(LIGHT_OBJECT)]) {
+					if(actorPtr->ID == CVars[getCVarsIdx(LIGHT_OBJECT)]) {
 						mainVar3 = (BBox3D3 + BBox3D1) / 2;
 						mainVar2 = (BBox3D4 + BBox3D2) / 2;
 					}
@@ -622,10 +622,10 @@ void mainDraw(int mode) {
 				}
 				//addToRedrawBox();
 			} else {
-				actorPtr->field_1A = -1;
-				actorPtr->field_18 = -1;
-				actorPtr->field_16 = -1;
-				actorPtr->field_14 = -1;
+				actorPtr->BBox3D4 = -1;
+				actorPtr->BBox3D3 = -1;
+				actorPtr->BBox3D2 = -1;
+				actorPtr->BBox3D1 = -1;
 			}
 		}
 	}

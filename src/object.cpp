@@ -34,7 +34,7 @@ int copyObjectToActor(int flag2, int var1, int foundName, int16 flag, int x, int
 	ZVStruct *zvPtr;
 
 	for(i = 0; i < NUM_MAX_ACTOR; i++) {
-		if(actorPtr->field_0 == -1)
+		if(actorPtr->ID == -1)
 			break;
 
 		actorPtr++;
@@ -69,14 +69,14 @@ int copyObjectToActor(int flag2, int var1, int foundName, int16 flag, int x, int
 	actorPtr->ANIM = var2;
 	actorPtr->FRAME = var3;
 
-	actorPtr->field_40 = var4;
-	actorPtr->field_42 = var5;
+	actorPtr->animType = var4;
+	actorPtr->animInfo = var5;
 
 	actorPtr->END_FRAME = 1;
 	actorPtr->END_ANIM = 1;
-	actorPtr->field_44 = -1;
-	actorPtr->field_46 = 0;
-	actorPtr->field_48 = -1;
+	actorPtr->nextAnim = -1;
+	actorPtr->nextAnimType = 0;
+	actorPtr->nextAnimInfo = -1;
 
 	actorPtr->modX = 0;
 	actorPtr->modY = 0;
@@ -98,13 +98,13 @@ int copyObjectToActor(int flag2, int var1, int foundName, int16 flag, int x, int
 	actorPtr->rotate.newAngle = 0;
 	actorPtr->rotate.param = 0;
 
-	actorPtr->field_60.oldAngle = 0;
-	actorPtr->field_60.newAngle = 0;
-	actorPtr->field_60.param = 0;
+	actorPtr->fall.oldAngle = 0;
+	actorPtr->fall.newAngle = 0;
+	actorPtr->fall.param = 0;
 
 	actorPtr->falling = 0;
 
-	actorPtr->field_72 = 0;
+	actorPtr->rotateTarget = 0;
 
 	actorPtr->speed = 0;
 
@@ -123,7 +123,7 @@ int copyObjectToActor(int flag2, int var1, int foundName, int16 flag, int x, int
 
 			initAnimInBody(var3, animPtr, bodyPtr);
 
-			actorPtr->field_4C = getAnimParam(animPtr);
+			actorPtr->nextAnimParam = getAnimParam(animPtr);
 			actorPtr->END_ANIM = 0;
 			actorPtr->flags |= 1;
 
@@ -141,10 +141,10 @@ int copyObjectToActor(int flag2, int var1, int foundName, int16 flag, int x, int
 			if(BBox3D4 > 199)
 				BBox3D4 = 199;
 
-			actorPtr->field_14 = BBox3D1;
-			actorPtr->field_16 = BBox3D2;
-			actorPtr->field_18 = BBox3D3;
-			actorPtr->field_1A = BBox3D4;
+			actorPtr->BBox3D1 = BBox3D1;
+			actorPtr->BBox3D2 = BBox3D2;
+			actorPtr->BBox3D3 = BBox3D3;
+			actorPtr->BBox3D4 = BBox3D4;
 		} else {
 			if(!(actorPtr->flags & 4)) {
 				actorPtr->flags &= 0xFFFE;

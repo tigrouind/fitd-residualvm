@@ -148,17 +148,17 @@ int anim(int animNum, int arg_2, int arg_4) {
 
 			initAnimInBody(currentProcessedActorPtr->FRAME, listAnim->get(animNum), listBody->get(currentProcessedActorPtr->bodyNum));
 
-			currentProcessedActorPtr->field_40 = arg_2;
-			currentProcessedActorPtr->field_42 = arg_4;
+			currentProcessedActorPtr->animType = arg_2;
+			currentProcessedActorPtr->animInfo = arg_4;
 		} else {
-			currentProcessedActorPtr->field_40 = arg_2;
-			currentProcessedActorPtr->field_42 = arg_4;
+			currentProcessedActorPtr->animType = arg_2;
+			currentProcessedActorPtr->animInfo = arg_4;
 
 			return(0);
 		}
 	} else {
 		if(animNum == -1) {
-			currentProcessedActorPtr->field_44 = -2;
+			currentProcessedActorPtr->nextAnim = -2;
 			return(1);
 		}
 
@@ -171,17 +171,17 @@ int anim(int animNum, int arg_2, int arg_4) {
 
 			initAnimInBody(currentProcessedActorPtr->FRAME, listAnim->get(animNum), listBody->get(currentProcessedActorPtr->bodyNum));
 
-			currentProcessedActorPtr->field_40 = arg_2;
-			currentProcessedActorPtr->field_42 = arg_4;
+			currentProcessedActorPtr->animType = arg_2;
+			currentProcessedActorPtr->animInfo = arg_4;
 		} else {
-			if((currentProcessedActorPtr->field_40 & 2) || (currentProcessedActorPtr->field_46 & 2))
+			if((currentProcessedActorPtr->animType & 2) || (currentProcessedActorPtr->nextAnimType & 2))
 				return(0);
 
 		}
 
-		currentProcessedActorPtr->field_44 = animNum;
-		currentProcessedActorPtr->field_46 = arg_2;
-		currentProcessedActorPtr->field_48 = arg_4;
+		currentProcessedActorPtr->nextAnim = animNum;
+		currentProcessedActorPtr->nextAnimType = arg_2;
+		currentProcessedActorPtr->nextAnimInfo = arg_4;
 	}
 
 	return(1);

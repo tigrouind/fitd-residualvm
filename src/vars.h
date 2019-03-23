@@ -76,7 +76,7 @@ struct actorFlags {
 
 
 struct actorStruct { // used to read data from file too
-	int16 field_0;
+	int16 ID;
 	int16 bodyNum;
 	union {
 		int16 flags;
@@ -84,10 +84,10 @@ struct actorStruct { // used to read data from file too
 	};
 	int16 dynFlags;
 	ZVStruct zv;
-	int16 field_14;
-	int16 field_16;
-	int16 field_18;
-	int16 field_1A;
+	int16 BBox3D1;
+	int16 BBox3D2;
+	int16 BBox3D3;
+	int16 BBox3D4;
 	int16 roomX;
 	int16 roomY;
 	int16 roomZ;
@@ -104,13 +104,13 @@ struct actorStruct { // used to read data from file too
 	uint32 CHRONO;
 	uint32 ROOM_CHRONO;
 	int16 ANIM;
-	int16 field_40;
-	int16 field_42;
-	int16 field_44;
-	int16 field_46;
-	int16 field_48;
+	int16 animType;
+	int16 animInfo;
+	int16 nextAnim;
+	int16 nextAnimType;
+	int16 nextAnimInfo;
 	int16 FRAME;
-	int16 field_4C;
+	int16 nextAnimParam;
 	int16 END_FRAME;
 	int16 END_ANIM;
 	int16 trackMode;
@@ -122,10 +122,10 @@ struct actorStruct { // used to read data from file too
 	int16 modY;
 	int16 modZ;
 
-	rotateStruct field_60;
+	rotateStruct fall;
 	int16 falling;
 	rotateStruct rotate;
-	int16 field_72;
+	int16 rotateTarget;
 	int16 speed;
 	rotateStruct speedChange;
 	int16 COL[3];
@@ -139,7 +139,7 @@ struct actorStruct { // used to read data from file too
 	int16 animActionFRAME;
 	int16 animActionParam;
 	int16 hitForce;
-	int16 field_98;
+	int16 animActionHotpoint;
 	point3dStruct hotPoint;
 
 	// aitd2

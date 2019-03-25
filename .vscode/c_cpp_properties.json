@@ -4,6 +4,7 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}",
+                "C:\\MinGW\\include",
                 "C:\\MinGW\\include\\SDL"
             ],
             "defines": [

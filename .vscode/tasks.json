@@ -11,7 +11,6 @@
                 "-I", "C:\\MinGW\\include\\SDL", 
                 "-L", "C:\\MinGW\\lib\\SDL", 
                 "-I", "${workspaceRoot}\\src", 
-                "-I", "${workspaceRoot}\\common", 
                 "-o", "${workspaceFolder}\\bin\\fitd.exe",                
                 "src\\common\\textconsole.cpp",
                 "src\\actor.cpp",

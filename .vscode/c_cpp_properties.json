@@ -9,7 +9,7 @@
             "defines": [
                 "INTERNAL_DEBUGGER"
             ],
-            "compilerPath": "C:\\MinGW\\bin\\gcc.exe",
+            "compilerPath": "gcc.exe",
             "intelliSenseMode": "clang-x64"
         }
     ],

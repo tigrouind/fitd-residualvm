@@ -311,7 +311,7 @@ void setStage(int newStage, int newRoomLocal, int X, int Y, int Z) {
 	currentProcessedActorPtr->modY = 0;
 	currentProcessedActorPtr->modZ = 0;
 
-	if(genVar9 == currentProcessedActorIdx) {
+	if(currentActorCameraTarget == currentProcessedActorIdx) {
 		if(newStage != currentEtage) {
 			changeFloor = 1;
 			newFloor = newStage;
@@ -1540,9 +1540,9 @@ processOpcode:
 					if(lifeTempVar2 != -1) {
 						if(g_fitd->getGameType() == GType_AITD1) {
 							currentCameraTarget = lifeTempVar1;
-							genVar9 = lifeTempVar2;
+							currentActorCameraTarget = lifeTempVar2;
 
-							lifeTempVar3 = actorTable[genVar9].room;
+							lifeTempVar3 = actorTable[currentActorCameraTarget].room;
 
 							if(lifeTempVar3 != currentDisplayedRoom) {
 								needChangeRoom = 1;
@@ -1557,9 +1557,9 @@ processOpcode:
 								newRoom = actorTable[lifeTempVar2].room;
 							} else {
 								currentCameraTarget = lifeTempVar1;
-								genVar9 = lifeTempVar2;
+								currentActorCameraTarget = lifeTempVar2;
 
-								lifeTempVar3 = actorTable[genVar9].room;
+								lifeTempVar3 = actorTable[currentActorCameraTarget].room;
 
 								if(lifeTempVar3 != currentDisplayedRoom) {
 									needChangeRoom = 1;

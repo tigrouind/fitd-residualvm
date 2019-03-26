@@ -110,7 +110,7 @@ int32 genVar5;
 int32 genVar6;
 int32 genVar7;
 int nextMusic;
-int16 genVar9;
+int16 currentActorCameraTarget;
 int16 giveUp;
 int16 inHand;
 int16 lightVar1;

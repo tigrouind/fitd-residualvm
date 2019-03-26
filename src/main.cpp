@@ -829,7 +829,7 @@ void initVars() {
 	lightVar1 = 0;
 	lightVar2 = 0;
 
-	genVar9 = -1;
+	currentActorCameraTarget = -1;
 	currentCameraTarget = -1;
 
 	statusScreenAllowed = 1;
@@ -1189,7 +1189,7 @@ void updateAllActorAndObjectsAITD2() {
 
 		if(currentObject->ownerIdx != -1) {
 			if(currentCameraTarget == i) {
-				genVar9 = currentObject->ownerIdx;
+				currentActorCameraTarget = currentObject->ownerIdx;
 			}
 		} else {
 			if(currentObject->stage == currentEtage) {
@@ -1261,7 +1261,7 @@ addObject:
 							currentProcessedActorIdx = actorIdx;
 
 							if(currentCameraTarget == i) {
-								genVar9 = currentProcessedActorIdx;
+								currentActorCameraTarget = currentProcessedActorIdx;
 							}
 
 							currentProcessedActorPtr->dynFlags = (currentObject->flags & 0x20) / 0x20; // recheck
@@ -1347,7 +1347,7 @@ void updateAllActorAndObjects() {
 	for(i = 0; i < maxObjects; i++) {
 		if(currentObject->ownerIdx != -1) {
 			if(currentCameraTarget == i) {
-				genVar9 = currentObject->ownerIdx;
+				currentActorCameraTarget = currentObject->ownerIdx;
 			}
 		} else {
 			if(currentObject->stage == currentEtage) {
@@ -1392,7 +1392,7 @@ addObject:
 							currentProcessedActorIdx = actorIdx;
 
 							if(currentCameraTarget == i) {
-								genVar9 = currentProcessedActorIdx;
+								currentActorCameraTarget = currentProcessedActorIdx;
 							}
 
 							currentProcessedActorPtr->dynFlags = (currentObject->flags & 0x20) / 0x20; // recheck
@@ -1916,7 +1916,7 @@ int changeCameraSub2(void) {
 	int foundDistance = 32000;
 	int foundCamera = -1;
 
-	actorStruct *actorPtr = &actorTable[genVar9];
+	actorStruct *actorPtr = &actorTable[currentActorCameraTarget];
 
 	int x1 = actorPtr->zv.ZVX1 / 10;
 	int x2 = actorPtr->zv.ZVX2 / 10;
@@ -1953,7 +1953,7 @@ void checkIfCameraChangeIsRequired(void) {
 		int zvz1;
 		int zvz2;
 
-		actorPtr = &actorTable[genVar9];
+		actorPtr = &actorTable[currentActorCameraTarget];
 
 		zvx1 = actorPtr->zv.ZVX1 / 10;
 		zvx2 = actorPtr->zv.ZVX2 / 10;

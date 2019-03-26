@@ -173,7 +173,7 @@ void loadRoom(int roomNumber) {
 				 }
 				 else*/
 				{
-					if(i != genVar9) {
+					if(i != currentActorCameraTarget) {
 						actorTable[i].worldX -= var_E;
 						actorTable[i].worldY += var_C;
 						actorTable[i].worldZ += var_A;

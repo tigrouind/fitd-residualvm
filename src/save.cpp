@@ -120,8 +120,8 @@ int loadSave(int saveNumber) {
 	ASSERT(sizeof(currentCameraTarget) == 2);
 	fread(&currentCameraTarget, 2, 1, fHandle);
 
-	ASSERT(sizeof(genVar9) == 2);
-	fread(&genVar9, 2, 1, fHandle);
+	ASSERT(sizeof(currentActorCameraTarget) == 2);
+	fread(&currentActorCameraTarget, 2, 1, fHandle);
 
 	ASSERT(sizeof(maxObjects) == 2);
 	fread(&maxObjects, 2, 1, fHandle);
@@ -605,8 +605,8 @@ int makeSaveFile(int entry) {
 	ASSERT(sizeof(currentCameraTarget) == 2);
 	fwrite(&currentCameraTarget, 2, 1, fHandle);
 
-	ASSERT(sizeof(genVar9) == 2);
-	fwrite(&genVar9, 2, 1, fHandle);
+	ASSERT(sizeof(currentActorCameraTarget) == 2);
+	fwrite(&currentActorCameraTarget, 2, 1, fHandle);
 
 	ASSERT(sizeof(maxObjects) == 2);
 	fwrite(&maxObjects, 2, 1, fHandle);

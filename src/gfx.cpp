@@ -158,9 +158,9 @@ void setupCamera() {
 
 #if INTERNAL_DEBUGGER
 	if(debuggerVar_topCamera) {
-		x = actorTable[genVar9].worldX + actorTable[genVar9].modX;
+		x = actorTable[currentActorCameraTarget].worldX + actorTable[currentActorCameraTarget].modX;
 		y = debufferVar_topCameraZoom;
-		z = actorTable[genVar9].worldZ + actorTable[genVar9].modZ;
+		z = actorTable[currentActorCameraTarget].worldZ + actorTable[currentActorCameraTarget].modZ;
 	}
 #endif
 	setupSelfModifyingCode(x, y, z); // setup camera position
@@ -737,8 +737,8 @@ void drawProjectedLine(int x1, int y1, int z1, int x2, int y2, int z2, int c)
 void drawZv(actorStruct *actorPtr) {
 	ZVStruct localZv;
 
-	if(actorPtr->room != actorTable[genVar9].room) {
-		getZvRelativePosition(&localZv, actorPtr->room, actorTable[genVar9].room);
+	if(actorPtr->room != actorTable[currentActorCameraTarget].room) {
+		getZvRelativePosition(&localZv, actorPtr->room, actorTable[currentActorCameraTarget].room);
 	} else {
 		copyZv(&actorPtr->zv, &localZv);
 	}

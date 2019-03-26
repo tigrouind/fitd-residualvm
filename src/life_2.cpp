@@ -682,9 +682,9 @@ processOpcode:
 
 					if(lifeTempVar2 != -1) {
 						currentCameraTarget = lifeTempVar1;
-						genVar9 = lifeTempVar2;
+						currentActorCameraTarget = lifeTempVar2;
 
-						lifeTempVar3 = actorTable[genVar9].room;
+						lifeTempVar3 = actorTable[currentActorCameraTarget].room;
 
 						if(lifeTempVar3 != currentDisplayedRoom) {
 							needChangeRoom = 1;

@@ -374,7 +374,7 @@ void processTrack(void) {
 			trackPtr += 2;
 
 			if(currentProcessedActorPtr->room != roomNumber) {
-				if(genVar9 == currentProcessedActorIdx) {
+				if(currentActorCameraTarget == currentProcessedActorIdx) {
 					needChangeRoom = 1;
 					newRoom = roomNumber;
 				}
@@ -795,7 +795,7 @@ void processTrack2(void) {
 			trackPtr += 2;
 
 			if(currentProcessedActorPtr->room != roomNumber) {
-				if(genVar9 == currentProcessedActorIdx) {
+				if(currentActorCameraTarget == currentProcessedActorIdx) {
 					needChangeRoom = 1;
 					newRoom = roomNumber;
 				}

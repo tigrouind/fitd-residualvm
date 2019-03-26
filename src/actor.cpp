@@ -382,7 +382,7 @@ void processActor1(void) {
 					currentProcessedActorPtr->HARD_COL = 255;
 				}
 
-				if(g_fitd->getGameType() == GType_AITD1 || (g_fitd->getGameType() >= GType_JACK && (var_3E->type != 10 || currentProcessedActorIdx != genVar9))) {
+				if(g_fitd->getGameType() == GType_AITD1 || (g_fitd->getGameType() >= GType_JACK && (var_3E->type != 10 || currentProcessedActorIdx != currentActorCameraTarget))) {
 					if(var_52 || var_50) { // move on the X or Y axis ? update to avoid entering the hard col
 
 						hardColVar1 = var_52;
@@ -692,7 +692,7 @@ void processActor2() {
 		currentProcessedActorPtr->zv.ZVZ1 += z;
 		currentProcessedActorPtr->zv.ZVZ2 += z;
 
-		if(currentProcessedActorIdx == genVar9) {
+		if(currentProcessedActorIdx == currentActorCameraTarget) {
 			needChangeRoom = 1;
 			newRoom = (short)ptr->parameter;
 		} else {

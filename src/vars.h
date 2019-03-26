@@ -237,7 +237,7 @@ extern int32 genVar5;
 extern int32 genVar6;
 extern int32 genVar7;
 extern int32 nextMusic;
-extern int16 genVar9;
+extern int16 currentActorCameraTarget;
 extern int16 giveUp;
 extern int16 inHand;
 extern int16 lightVar1;

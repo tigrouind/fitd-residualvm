@@ -11,9 +11,9 @@ CPPFLAGS := -g -DINTERNAL_DEBUGGER -I "$(SRC_DIR)/src" -I "$(SRC_DIR)/src/common
 fitd: $(BIN_DIR)/fitd.exe
 
 $(BIN_DIR)/fitd.exe: $(OBJ_FILES)
-	mkdir -p $(BIN_DIR)
+	if not exist "$(BIN_DIR)" mkdir "$(BIN_DIR)"
 	g++ -o $(BIN_DIR)/fitd.exe $^ $(LDFLAGS) 
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/src/%.cpp
-	mkdir -p $(@D)
+	if not exist "$(@D)" mkdir "$(@D)"
 	g++ $(CPPFLAGS) -c -o $@ $<

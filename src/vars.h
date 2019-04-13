@@ -110,7 +110,7 @@ struct actorStruct { // used to read data from file too
 	int16 nextAnimType;
 	int16 nextAnimInfo;
 	int16 FRAME;
-	int16 nextAnimParam;
+	int16 FRAME_COUNT;
 	int16 END_FRAME;
 	int16 END_ANIM;
 	int16 trackMode;

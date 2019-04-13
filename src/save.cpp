@@ -414,8 +414,8 @@ int loadSave(int saveNumber) {
 		ASSERT(sizeof(actorTable[i].FRAME) == 2);
 		fread(&actorTable[i].FRAME, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].nextAnimParam) == 2);
-		fread(&actorTable[i].nextAnimParam, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].FRAME_COUNT) == 2);
+		fread(&actorTable[i].FRAME_COUNT, 2, 1, fHandle);
 
 		ASSERT(sizeof(actorTable[i].END_FRAME) == 2);
 		fread(&actorTable[i].END_FRAME, 2, 1, fHandle);
@@ -880,8 +880,8 @@ int makeSaveFile(int entry) {
 		ASSERT(sizeof(actorTable[i].FRAME) == 2);
 		fwrite(&actorTable[i].FRAME, 2, 1, fHandle);
 
-		ASSERT(sizeof(actorTable[i].nextAnimParam) == 2);
-		fwrite(&actorTable[i].nextAnimParam, 2, 1, fHandle);
+		ASSERT(sizeof(actorTable[i].FRAME_COUNT) == 2);
+		fwrite(&actorTable[i].FRAME_COUNT, 2, 1, fHandle);
 
 		ASSERT(sizeof(actorTable[i].END_FRAME) == 2);
 		fwrite(&actorTable[i].END_FRAME, 2, 1, fHandle);

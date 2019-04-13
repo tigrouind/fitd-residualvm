@@ -123,7 +123,7 @@ int copyObjectToActor(int flag2, int var1, int foundName, int16 flag, int x, int
 
 			initAnimInBody(var3, animPtr, bodyPtr);
 
-			actorPtr->nextAnimParam = getAnimParam(animPtr);
+			actorPtr->FRAME_COUNT = getAnimParam(animPtr);
 			actorPtr->END_ANIM = 0;
 			actorPtr->flags |= 1;
 

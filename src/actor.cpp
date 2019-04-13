@@ -279,7 +279,7 @@ void processActor1(void) {
 		currentProcessedActorPtr->END_ANIM = 0;
 		currentProcessedActorPtr->FRAME = 0;
 
-		currentProcessedActorPtr->nextAnimParam = getAnimParam(listAnim->get(var_6));
+		currentProcessedActorPtr->FRAME_COUNT = getAnimParam(listAnim->get(var_6));
 	}
 
 	if(currentProcessedActorPtr->ANIM == -1) { // no animation
@@ -594,7 +594,7 @@ void processActor1(void) {
 	if(currentProcessedActorPtr->END_FRAME) { // key frame change
 		currentProcessedActorPtr->FRAME++;
 
-		if(currentProcessedActorPtr->FRAME >= currentProcessedActorPtr->nextAnimParam) { // end of anim ?
+		if(currentProcessedActorPtr->FRAME >= currentProcessedActorPtr->FRAME_COUNT) { // end of anim ?
 			currentProcessedActorPtr->END_ANIM = 1; // end of anim
 			currentProcessedActorPtr->FRAME = 0; // restart anim
 

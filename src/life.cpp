@@ -268,10 +268,21 @@ void animMove(int a, int b, int c, int d, int e, int f, int g) {
 		}
 	}
 	if(currentProcessedActorPtr->speed == 0) {
-		anim(d, 0, a);
+		if(currentProcessedActorPtr->ANIM == c) {
+			anim(d, 0, a);
+		}
+		else {
+			if(currentProcessedActorPtr->rotateTarget == 0)	{
+				anim(a, 1, -1);
+			}
+			if(currentProcessedActorPtr->rotateTarget == 1)	{
+				anim(g, 0, a);
+			}
+			if(currentProcessedActorPtr->rotateTarget == -1) {
+				anim(f, 0, a);
+			}
+		}
 	}
-
-
 }
 
 void setStage(int newStage, int newRoomLocal, int X, int Y, int Z) {

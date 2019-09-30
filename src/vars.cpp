@@ -237,8 +237,8 @@ const char *listAnimSelect[] = {
 	"LISTANI2",
 };
 
-int32 mainVar3 = 4000;
-int32 mainVar2 = -2000;
+int32 lightPosX = 4000;
+int32 lightPosY = -2000;
 
 int32 clipLeft = 0;
 int32 clipTop = 0;

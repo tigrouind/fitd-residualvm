@@ -125,8 +125,8 @@ void mainLoop(int allowSystemMenu) {
 		if(changeFloor == 0) {
 			if(g_fitd->getGameType() == GType_AITD1) {
 				if(CVars[getCVarsIdx(LIGHT_OBJECT)] == -1) {
-					//        mainVar2 = 2000;
-					//        mainVar3 = 2000;
+					//        lightPosY = 2000;
+					//        lightPosX = 2000;
 				}
 			}
 

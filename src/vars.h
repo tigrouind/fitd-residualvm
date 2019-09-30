@@ -356,8 +356,8 @@ extern int16 hardColVar2;
 
 extern ZVStruct hardClip;
 
-extern int32 mainVar3;
-extern int32 mainVar2;
+extern int32 lightPosX;
+extern int32 lightPosY;
 
 extern int32 clipLeft;
 extern int32 clipTop;

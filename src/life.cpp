@@ -111,6 +111,7 @@ int createFlow(int mode, int X, int Y, int Z, int stage, int room, int alpha, in
 	for(i = 0; i < NUM_MAX_ACTOR; i++) { // count the number of active actors
 		if(currentActorPtr->ID == -1)
 			break;
+		currentActorPtr++;
 	}
 
 	if(i == NUM_MAX_ACTOR) { // no free actor entry, abort

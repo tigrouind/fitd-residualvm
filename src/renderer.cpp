@@ -316,13 +316,6 @@ void computeBoneRotation(int16 *pointPtr, int numOfPoint) {
 		int y = *(int16 *)(pointPtr + 1);
 		int z = *(int16 *)(pointPtr + 2);
 
-		if(boneRotateZ) {
-			int tempX = x;
-			int tempY = y;
-			x = ((((tempX * boneRotateZSin) - (tempY * boneRotateZCos))) >> 16) << 1;
-			y = ((((tempX * boneRotateZCos) + (tempY * boneRotateZSin))) >> 16) << 1;
-		}
-
 		if(boneRotateY) {
 			int tempX = x;
 			int tempZ = z;
@@ -336,6 +329,13 @@ void computeBoneRotation(int16 *pointPtr, int numOfPoint) {
 			int tempZ = z;
 			y = ((((tempY * boneRotateXSin) - (tempZ * boneRotateXCos))) >> 16) << 1;
 			z = ((((tempY * boneRotateXCos) + (tempZ * boneRotateXSin))) >> 16) << 1;
+		}
+
+		if(boneRotateZ) {
+			int tempX = x;
+			int tempY = y;
+			x = ((((tempX * boneRotateZSin) - (tempY * boneRotateZCos))) >> 16) << 1;
+			y = ((((tempX * boneRotateZCos) + (tempY * boneRotateZSin))) >> 16) << 1;
 		}
 
 		*(int16 *)(pointPtr) = x;
@@ -738,14 +738,6 @@ int prerenderFlag0(int x, int y, int z, int alpha, int beta, int gamma, void *mo
 		if(!noModelRotation) {
 			{
 				float tempX = X;
-				float tempY = Y;
-
-				X = (((modelSinGamma * tempX) - (modelCosGamma * tempY)) / 65536.f) * 2.f;
-				Y = (((modelCosGamma * tempX) + (modelSinGamma * tempY)) / 65536.f) * 2.f;
-			}
-
-			{
-				float tempX = X;
 				float tempZ = Z;
 
 				X = (((modelSinBeta * tempX) - (modelCosBeta * tempZ)) / 65536.f) * 2.f;
@@ -758,6 +750,14 @@ int prerenderFlag0(int x, int y, int z, int alpha, int beta, int gamma, void *mo
 
 				Y = (((modelSinAlpha * tempY) - (modelCosAlpha * tempZ)) / 65536.f) * 2.f;
 				Z = (((modelCosAlpha * tempY) + (modelSinAlpha * tempZ)) / 65536.f) * 2.f;
+			}
+
+			{
+				float tempX = X;
+				float tempY = Y;
+
+				X = (((modelSinGamma * tempX) - (modelCosGamma * tempY)) / 65536.f) * 2.f;
+				Y = (((modelCosGamma * tempX) + (modelSinGamma * tempY)) / 65536.f) * 2.f;
 			}
 		}
 

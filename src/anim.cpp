@@ -50,9 +50,9 @@ int initAnimInBody(int frame, char *anim, char *body) {
 	cx = ax;
 
 	if(flag & 8) {
-		ax = ((ax << 4) + 8) * frame;
+		ax = ((ax * 16) + 8) * frame;
 	} else {
-		ax = ((ax + 1) << 3) * frame;
+		ax = ((ax * 8) + 8) * frame;
 	}
 
 	anim += ax;
@@ -325,9 +325,9 @@ int16 setInterAnimObjet(int frame, char *animPtr, char *bodyPtr) {
 	animPtr += 4;
 
 	if(flag & 8) {
-		animPtr += ((numOfBonesInAnim << 4) + 8) * frame; // seek to keyframe
+		animPtr += ((numOfBonesInAnim * 16) + 8) * frame; // seek to keyframe
 	} else {
-		animPtr += ((numOfBonesInAnim + 1) * 8) * frame; // seek to keyframe
+		animPtr += ((numOfBonesInAnim * 8) + 8) * frame; // seek to keyframe
 	}
 
 	// animVar1 = ptr to the current keyFrame

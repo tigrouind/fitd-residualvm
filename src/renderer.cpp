@@ -596,7 +596,7 @@ int computeModel(int x, int y, int z, int alpha, int beta, int gamma, void *mode
 			X += renderX;
 			Y += renderY;
 
-			if(Y > 10000) { // depth clamp
+			if(Y > 10000) { // height clamp
 				*(outPtr++) = -10000;
 				*(outPtr++) = -10000;
 				*(outPtr++) = -10000;

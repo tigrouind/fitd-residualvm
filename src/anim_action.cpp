@@ -321,7 +321,7 @@ void processAnimAction(void) {
 		objectTable[objIdx].y = y;
 		objectTable[objIdx].z = z;
 
-		objectTable[objIdx].alpha = currentProcessedActorPtr->ID; // hu ?
+		objectTable[objIdx].alpha = currentProcessedActorPtr->ID; // original thrower
 
 		actorPtr->dynFlags = 0;
 		actorPtr->animActionType = 9;
